@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>জরুরি রক্ত চক্র · Emergency Blood Circle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Baloo+Da+2:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-900:#08331d;
+    --green-700:#0b5c34;
+    --green-600:#0e7a44;
+    --green-100:#e3f3e8;
+    --red-600:#c62f22;
+    --red-500:#da3b2c;
+    --red-100:#fbe6e2;
+    --amber-600:#b8760f;
+    --amber-100:#fbedd6;
+    --ink:#17201a;
+    --ink-soft:#3f4a43;
+    --paper:#faf8f2;
+    --paper-raised:#ffffff;
+    --line:#dcd6c6;
+    --shadow-none:none;
+    --radius-tab: 4px;
+    --focus: 3px solid #0e7a44;
+  }
+  [data-theme="dark"]{
+    --ink:#eef0ea;
+    --ink-soft:#b7bfb6;
+    --paper:#0f1712;
+    --paper-raised:#152019;
+    --line:#2a352c;
+    --green-100:#12321f;
+    --red-100:#3a1a15;
+    --amber-100:#3a2c13;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Hind Siliguri', system-ui, sans-serif;
+    line-height:1.5;
+    transition:background .2s ease, color .2s ease;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo Da 2','Hind Siliguri',system-ui,sans-serif;
+    font-weight:700;
+    margin:0;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .container{max-width:1040px;margin:0 auto;padding:0 20px;}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);}
+  :focus-visible{outline:var(--focus);outline-offset:2px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    border-bottom:1px solid var(--line);
+    position:sticky;top:0;background:var(--paper);z-index:40;
+  }
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:12px;}
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{width:34px;height:34px;flex:0 0 auto;}
+  .brand-text{font-size:1.15rem;line-height:1.15;}
+  .brand-text small{display:block;font-family:'Hind Siliguri';font-weight:500;font-size:.68rem;letter-spacing:.02em;color:var(--ink-soft);}
+  .header-controls{display:flex;gap:8px;align-items:center;}
+  .pill-btn{
+    border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);
+    padding:8px 14px;border-radius:999px;font-size:.85rem;font-weight:600;cursor:pointer;
+    min-height:40px;
+  }
+  .pill-btn:hover{border-color:var(--green-600);}
+  .icon-btn{
+    border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);
+    width:40px;height:40px;border-radius:999px;cursor:pointer;font-size:1rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .auth-chip{border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);padding:7px 12px;border-radius:999px;font-size:.82rem;font-weight:700;cursor:pointer;min-height:40px;display:inline-flex;align-items:center;gap:6px;}
+  .auth-chip:hover{border-color:var(--green-700);}
+  .auth-menu{position:relative;display:inline-block;}
+  .auth-dropdown{position:absolute;right:0;top:calc(100% + 6px);background:var(--paper-raised);border:1px solid var(--line);min-width:160px;z-index:50;box-shadow:0 4px 14px rgba(0,0,0,.12);}
+  .auth-dropdown button{width:100%;text-align:left;padding:10px 14px;background:none;border:none;font-size:.85rem;color:var(--ink);cursor:pointer;}
+  .auth-dropdown button:hover{background:var(--green-100);}
+  .auth-tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:14px;}
+  .auth-tab{flex:1;text-align:center;padding:10px;font-weight:700;font-size:.88rem;cursor:pointer;color:var(--ink-soft);border-bottom:2px solid transparent;background:none;border-top:none;border-left:none;border-right:none;}
+  .auth-tab.active{color:var(--green-700);border-bottom-color:var(--green-700);}
+  .auth-note{font-size:.76rem;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:10px;margin-top:4px;}
+  .auth-gate{min-height:calc(100vh - 65px);display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(180deg, var(--green-100) 0%, var(--paper) 130%);}
+  .auth-gate-box{max-width:380px;width:100%;background:var(--paper-raised);border:1px solid var(--line);padding:30px 26px;text-align:center;}
+  .auth-gate-mark{width:42px;height:42px;margin-bottom:8px;}
+  .auth-gate-sub{color:var(--ink-soft);font-size:.88rem;margin:6px 0 18px;}
+  .auth-gate #authGateFormArea{text-align:left;}
+  .auth-gate .auth-note{text-align:left;}
+  .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+  .admin-stat{background:var(--paper);border:1px solid var(--line);padding:10px 6px;text-align:center;}
+  .admin-stat b{display:block;font-size:1.3rem;font-family:'Baloo Da 2';color:var(--green-700);}
+  .admin-stat span{font-size:.68rem;color:var(--ink-soft);}
+  .admin-section-title{font-weight:700;font-size:.88rem;color:var(--ink-soft);margin-bottom:8px;border-top:1px solid var(--line);padding-top:12px;}
+  .admin-row{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);padding:10px 12px;margin-bottom:8px;flex-wrap:wrap;}
+  .admin-row-actions{display:flex;gap:6px;flex-wrap:wrap;}
+  .admin-row-actions .btn{padding:6px 10px;font-size:.76rem;min-height:auto;}
+  .admin-link-row{text-align:center;margin-top:6px;}
+  .admin-access-note{font-size:.78rem;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);padding:8px 10px;margin-bottom:12px;}
+
+  /* ---------- Admin access (dark, distinct from public login) ---------- */
+  .admin-access-panel{background:#0d1210;border:1px solid #24312a;padding:20px;margin:-4px -4px 0;color:#e7ede9;}
+  .admin-access-panel .admin-access-note{background:#161d19;border:1px dashed #34443a;color:#9fb0a6;}
+  .admin-access-panel label{color:#9fb0a6;}
+  .admin-access-panel input{background:#141a17;border:1px solid #2b3a31;color:#eef3ef;}
+  .admin-access-panel input:focus{border-color:var(--red-500);}
+  .admin-access-panel .error-text{color:#ff8a75;}
+  .admin-access-kicker{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red-500);font-weight:700;margin-bottom:6px;}
+
+  /* ---------- Admin Dashboard (full screen) ---------- */
+  .admin-dashboard{position:fixed;inset:0;background:var(--paper);z-index:500;display:none;flex-direction:column;}
+  .admin-dashboard.open{display:flex;}
+  .admin-dash-top{background:#101614;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .admin-dash-title{font-family:'Baloo Da 2';font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px;}
+  .admin-dash-title .tag{background:var(--red-600);font-size:.65rem;padding:2px 8px;border-radius:999px;letter-spacing:.05em;}
+  .admin-dash-actions{display:flex;gap:8px;}
+  .admin-dash-actions button{background:transparent;border:1px solid #3a453f;color:#fff;padding:7px 13px;border-radius:4px;font-size:.8rem;cursor:pointer;font-weight:600;}
+  .admin-dash-actions button:hover{border-color:var(--green-600);}
+  .admin-dash-nav{display:flex;gap:4px;background:var(--paper-raised);border-bottom:1px solid var(--line);padding:0 16px;overflow-x:auto;}
+  .admin-dash-nav button{background:none;border:none;padding:13px 16px;font-size:.85rem;font-weight:700;color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+  .admin-dash-nav button.active{color:var(--green-700);border-color:var(--green-700);}
+  .admin-dash-body{flex:1;overflow:auto;padding:22px;}
+  .admin-dash-body .container{max-width:1100px;}
+  .admin-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px;}
+  .admin-stat-card{background:var(--paper-raised);border:1px solid var(--line);border-top:3px solid var(--green-700);padding:16px;}
+  .admin-stat-card b{display:block;font-size:1.7rem;font-family:'Baloo Da 2';color:var(--ink);}
+  .admin-stat-card span{font-size:.78rem;color:var(--ink-soft);}
+  .admin-table-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--paper-raised);}
+  table.admin-table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:640px;}
+  table.admin-table th{text-align:left;background:var(--green-100);color:var(--green-900);padding:10px 12px;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;position:sticky;top:0;}
+  table.admin-table td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:middle;}
+  table.admin-table tr:hover td{background:var(--paper);}
+  .admin-table-actions{display:flex;gap:6px;flex-wrap:wrap;}
+  .admin-table-actions button{padding:5px 10px;font-size:.74rem;border-radius:3px;cursor:pointer;border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);}
+  .admin-table-actions button:hover{border-color:var(--green-700);}
+  .admin-table-actions button.danger{color:var(--red-600);border-color:var(--red-200,var(--red-100));}
+  .admin-table-actions button.danger:hover{border-color:var(--red-600);}
+  .admin-pill{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;}
+  .admin-pill.admin-yes{background:var(--red-100);color:var(--red-600);}
+  .admin-pill.admin-no{background:var(--line);color:var(--ink-soft);}
+  .admin-pill.hidden-yes{background:var(--amber-100);color:var(--amber-600);}
+  .admin-section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+  .admin-section-head h3{font-family:'Baloo Da 2';font-size:1.1rem;color:var(--ink);}
+  .admin-search{padding:8px 12px;border:1px solid var(--line);font-size:.85rem;min-width:220px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:44px 0 30px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg, var(--green-100) 0%, var(--paper) 130%);
+  }
+  .hero h1{font-size:clamp(1.7rem,4.5vw,2.6rem);color:var(--green-900);max-width:14ch;}
+  [data-theme="dark"] .hero h1{color:#bfe6cb;}
+  .hero p.lede{max-width:52ch;color:var(--ink-soft);margin-top:10px;font-size:1.02rem;}
+  .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;}
+  .btn{
+    border:none;border-radius:var(--radius-tab);padding:12px 18px;font-weight:700;font-size:.95rem;
+    cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--green-700);color:#fff;}
+  .btn-primary:hover{background:var(--green-900);}
+  .btn-danger{background:var(--red-600);color:#fff;}
+  .btn-danger:hover{background:#9c241a;}
+  .btn-outline{background:transparent;border:1.5px solid var(--ink);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--green-700);color:var(--green-700);}
+  .btn-ghost{background:transparent;color:var(--green-700);border:none;font-weight:700;text-decoration:underline;padding:6px 2px;min-height:auto;}
+
+  /* ---------- Sections ---------- */
+  section.block{padding:34px 0;border-bottom:1px solid var(--line);}
+  .block-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+  .block-head h2{font-size:1.4rem;color:var(--green-900);}
+  [data-theme="dark"] .block-head h2{color:#bfe6cb;}
+  .block-sub{color:var(--ink-soft);font-size:.9rem;margin-top:4px;}
+
+  /* ---------- Urgent board ---------- */
+  .req-list{display:flex;flex-direction:column;gap:12px;}
+  .req-card{
+    border-left:5px solid var(--red-600);background:var(--paper-raised);
+    padding:14px 16px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line);border-left-width:5px;
+  }
+  .req-card.moderate{border-left-color:var(--amber-600);}
+  .req-card.expired{opacity:.55;}
+  .req-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;}
+  .req-title{font-weight:700;font-size:1.05rem;}
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:700;
+  }
+  .badge-critical{background:var(--red-100);color:var(--red-600);}
+  .badge-moderate{background:var(--amber-100);color:var(--amber-600);}
+  .badge-expired{background:var(--line);color:var(--ink-soft);}
+  .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--red-600);display:inline-block;animation:pulse 1.4s infinite;}
+  @media (prefers-reduced-motion: reduce){.pulse-dot{animation:none;}}
+  @keyframes pulse{0%{opacity:1;}50%{opacity:.25;}100%{opacity:1;}}
+  .req-meta{color:var(--ink-soft);font-size:.87rem;}
+  .req-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;}
+  .req-actions .btn{padding:8px 14px;font-size:.82rem;min-height:auto;}
+  .countdown{font-family:'Baloo Da 2';font-weight:700;font-size:.95rem;color:var(--red-600);}
+  .priority-badge{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--ink);color:#fff;}
+  [data-theme="dark"] .priority-badge{background:#3a4038;}
+  .match-panel{margin-top:6px;border-top:1px dashed var(--line);padding-top:8px;}
+  .match-panel-title{font-size:.78rem;font-weight:700;color:var(--ink-soft);margin-bottom:6px;}
+  .match-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--paper);padding:4px 10px;border-radius:999px;font-size:.78rem;margin:0 6px 6px 0;}
+  .match-chip a{color:var(--green-700);font-weight:700;text-decoration:none;}
+  .empty-note{
+    border:1px dashed var(--line);padding:20px;text-align:center;color:var(--ink-soft);font-size:.92rem;
+  }
+
+  /* ---------- Filters ---------- */
+  .filter-panel{display:flex;flex-direction:column;gap:14px;background:var(--paper-raised);border:1px solid var(--line);padding:16px;}
+  .filter-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    border:1px solid var(--line);background:var(--paper);color:var(--ink);
+    padding:7px 13px;border-radius:999px;font-size:.85rem;font-weight:600;cursor:pointer;min-height:38px;
+  }
+  .chip[aria-pressed="true"]{background:var(--green-700);border-color:var(--green-700);color:#fff;}
+  select, input[type=text], input[type=tel], input[type=number], input[type=date], textarea{
+    font-family:inherit;padding:10px 12px;border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);
+    font-size:.92rem;width:100%;
+  }
+  select:focus, input:focus, textarea:focus{border-color:var(--green-700);}
+  label{font-size:.82rem;font-weight:600;color:var(--ink-soft);display:block;margin-bottom:5px;}
+  .field{margin-bottom:12px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media (max-width:560px){.field-row{grid-template-columns:1fr;}}
+  .filter-toggle-row{display:flex;align-items:center;gap:8px;font-size:.88rem;}
+  .location-card{background:var(--paper);border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:10px;}
+  .location-card-head{font-weight:700;font-size:.9rem;color:var(--green-700);display:flex;align-items:center;gap:6px;}
+  .location-methods{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .location-method-btn{flex:1 1 200px;justify-content:center;}
+  .location-or{font-size:.76rem;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+  .location-method-select{flex:1 1 200px;}
+  .location-status{font-size:.82rem;padding:9px 11px;border-radius:2px;display:none;line-height:1.4;}
+  .location-status.show{display:block;}
+  .location-status.success{background:var(--green-100);color:var(--green-700);border:1px solid var(--green-700);}
+  .location-status.error{background:var(--amber-100);color:var(--amber-600);border:1px solid var(--amber-600);}
+  .location-status.info{background:var(--paper-raised);color:var(--ink-soft);border:1px dashed var(--line);}
+  .location-clear{font-size:.78rem;color:var(--red-600);text-decoration:underline;cursor:pointer;background:none;border:none;padding:0;align-self:flex-start;font-weight:600;}
+
+  /* ---------- Donor results ---------- */
+  .donor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:16px;}
+  .donor-card{border:1px solid var(--line);background:var(--paper-raised);padding:14px;display:flex;flex-direction:column;gap:8px;position:relative;border-top:4px solid var(--green-700);}
+  .donor-card.highlight{outline:var(--focus);outline-offset:0;}
+  .donor-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+  .donor-name{font-weight:700;font-size:1.02rem;}
+  .bg-tag{font-family:'Baloo Da 2';font-weight:700;font-size:1rem;color:var(--red-600);background:var(--red-100);padding:2px 9px;border-radius:6px;}
+  .donor-meta{font-size:.85rem;color:var(--ink-soft);}
+  .elig-yes{color:var(--green-700);font-weight:700;font-size:.82rem;}
+  .elig-no{color:var(--amber-600);font-weight:700;font-size:.82rem;}
+  .donor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;}
+  .donor-actions .btn, .donor-actions .btn-outline{padding:7px 12px;font-size:.8rem;min-height:auto;}
+  .status-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+  .status-now{background:#1e9e52;}
+  .status-later{background:#c99a1f;}
+  .status-off{background:#9a9086;}
+  .status-line{font-size:.8rem;font-weight:600;display:flex;align-items:center;}
+  .distance-chip{font-size:.75rem;color:var(--green-700);font-weight:700;background:var(--green-100);padding:2px 8px;border-radius:999px;}
+  .status-cycle-btn{font-size:.72rem;border:1px dashed var(--line);background:transparent;color:var(--ink-soft);padding:4px 8px;cursor:pointer;border-radius:4px;}
+  .copy-btn{border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);padding:7px 10px;font-size:.85rem;cursor:pointer;min-height:auto;border-radius:2px;}
+  .copy-btn:hover{border-color:var(--green-700);}
+  .copy-btn.copied{background:var(--green-100);border-color:var(--green-700);color:var(--green-700);}
+  .match-copy-btn{border:none;background:transparent;color:var(--green-700);font-weight:700;cursor:pointer;font-size:.78rem;padding:0;text-decoration:underline;}
+  .phone-action{display:inline-flex;align-items:stretch;border-radius:6px;overflow:hidden;}
+  .phone-action-call{background:var(--green-700);color:#fff;padding:9px 16px;font-weight:700;font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;}
+  .phone-action-call:hover{background:var(--green-900);}
+  .phone-action-copy{background:var(--green-900);color:#fff;border:none;border-left:1px solid rgba(255,255,255,.28);padding:9px 12px;cursor:pointer;font-size:.9rem;line-height:1;}
+  .phone-action-copy:hover{background:#062615;}
+  .phone-action-copy.copied{background:#1e9e52;}
+  .phone-action-mini{display:inline-flex;align-items:stretch;border-radius:5px;overflow:hidden;vertical-align:middle;margin-left:6px;}
+  .phone-action-mini a{background:var(--green-700);color:#fff;padding:3px 9px;font-size:.72rem;font-weight:700;text-decoration:none;}
+  .phone-action-mini button{background:var(--green-900);color:#fff;border:none;border-left:1px solid rgba(255,255,255,.28);padding:3px 8px;font-size:.72rem;cursor:pointer;}
+  .phone-action-mini button.copied{background:#1e9e52;}
+
+  /* ---------- Map ---------- */
+  .map-wrap{display:flex;flex-direction:column;gap:14px;}
+  .map-svg-box{border:1px solid var(--line);background:var(--paper-raised);padding:10px;}
+  .div-node{cursor:pointer;}
+  .div-node rect{fill:var(--paper);stroke:var(--line);stroke-width:1.5;}
+  .div-node[aria-pressed="true"] rect{fill:var(--green-700);stroke:var(--green-700);}
+  .div-node[aria-pressed="true"] text{fill:#fff;}
+  .div-node text{fill:var(--ink);font-family:'Hind Siliguri';font-size:11px;}
+  .div-node .count{font-weight:700;font-size:13px;}
+  .div-node:focus-visible rect{outline:var(--focus);outline-offset:2px;}
+  .map-mode-row{display:flex;gap:8px;}
+  .map-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--ink-soft);align-items:center;}
+  .map-legend .sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:middle;}
+
+  /* ---------- Form ---------- */
+  .form-card{background:var(--paper-raised);border:1px solid var(--line);padding:20px;max-width:640px;}
+  .error-text{color:var(--red-600);font-size:.8rem;margin-top:4px;}
+  .form-msg{padding:10px 12px;border-left:4px solid var(--green-700);background:var(--green-100);font-size:.88rem;margin-bottom:14px;}
+  .form-msg.error{border-color:var(--red-600);background:var(--red-100);}
+  .checkbox-row{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--ink-soft);}
+  .checkbox-row input{width:auto;margin-top:3px;}
+  .disclosure{font-size:.78rem;color:var(--ink-soft);margin-top:10px;border-top:1px dashed var(--line);padding-top:10px;}
+
+  /* ---------- Footer ---------- */
+  footer.site{padding:26px 0 40px;color:var(--ink-soft);font-size:.85rem;}
+  footer.site a{text-decoration:underline;}
+
+  /* ---------- Modal ---------- */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(10,15,12,.55);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;}
+  .modal-box{background:var(--paper-raised);border:1px solid var(--line);padding:22px;max-width:400px;width:100%;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;}
+
+  .sr-toast{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+    background:var(--green-900);color:#fff;padding:11px 20px;font-size:.88rem;font-weight:600;
+    z-index:200;max-width:90vw;
+  }
+  [data-theme="dark"] .sr-toast{background:#bfe6cb;color:#08331d;}
+</style>
+</head>
+<body data-theme="light">
+
+<header class="site">
+  <div class="container header-row">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2C12 2 5 10.5 5 15.2C5 19.2 8.13 22 12 22C15.87 22 19 19.2 19 15.2C19 10.5 12 2 12 2Z" fill="#c62f22"/>
+      </svg>
+      <div class="brand-text">
+        <span data-i18n-brand>জরুরি রক্ত চক্র</span>
+        <small data-i18n-brand-sub>Emergency Blood Circle</small>
+      </div>
+    </div>
+    <div class="header-controls">
+      <span id="authArea"></span>
+      <button class="pill-btn" id="langToggle" type="button">EN / বাং</button>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">🌙</button>
+    </div>
+  </div>
+</header>
+
+<div id="authGate" class="auth-gate">
+  <div class="auth-gate-box">
+    <svg class="auth-gate-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 2C12 2 5 10.5 5 15.2C5 19.2 8.13 22 12 22C15.87 22 19 19.2 19 15.2C19 10.5 12 2 12 2Z" fill="#c62f22"/>
+    </svg>
+    <h1 data-i18n="brand" style="font-size:1.5rem;">জরুরি রক্ত চক্র</h1>
+    <p class="auth-gate-sub" data-i18n="authGateSub">চালিয়ে যেতে অনুগ্রহ করে লগইন করুন বা একটি অ্যাকাউন্ট তৈরি করুন।</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="gateTabLogin" type="button" data-i18n="authLoginTab">লগইন</button>
+      <button class="auth-tab" id="gateTabRegister" type="button" data-i18n="authRegisterTab">অ্যাকাউন্ট খুলুন</button>
+    </div>
+    <div id="authGateFormArea"></div>
+    <div class="auth-note">🌐 <span id="gateLangToggle" style="cursor:pointer;text-decoration:underline;">EN / বাং</span></div>
+    <div class="auth-note">⚠️ <span data-i18n="authSecurityNote">এটি একটি হালকা, ব্রাউজার-ভিত্তিক লগইন সিস্টেম।</span></div>
+    <div class="admin-link-row"><button class="btn-ghost" id="gateAdminLinkBtn" type="button">🔐 <span data-i18n="adminAccessLink">অ্যাডমিন অ্যাক্সেস</span></button></div>
+  </div>
+</div>
+
+<div id="mainApp" style="display:none;">
+<section class="hero">
+  <div class="container">
+    <h1 data-i18n="heroTitle">যখন প্রতিটি মিনিট গুরুত্বপূর্ণ, দ্রুত রক্তদাতা খুঁজুন</h1>
+    <p class="lede" data-i18n="heroLede">রক্তের গ্রুপ ও এলাকা দিয়ে খুঁজুন, নিজে দাতা হিসেবে নাম লেখান, অথবা জরুরি প্রয়োজনে সবার কাছে অনুরোধ পাঠান — কোনো অ্যাকাউন্ট ছাড়াই।</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="heroSearchBtn" type="button" data-i18n="heroBtnSearch">দাতা খুঁজুন</button>
+      <button class="btn btn-outline" id="heroRegisterBtn" type="button" data-i18n="heroBtnRegister">দাতা হিসেবে যুক্ত হোন</button>
+      <button class="btn btn-danger" id="heroRequestBtn" type="button" data-i18n="heroBtnRequest">জরুরি অনুরোধ পোস্ট করুন</button>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="requestsSection">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <h2 data-i18n="urgentHeading">সক্রিয় জরুরি অনুরোধ</h2>
+        <div class="block-sub" data-i18n="urgentSub">অনুরোধগুলো পোস্ট করার ৭২ ঘণ্টা পর স্বয়ংক্রিয়ভাবে মেয়াদোত্তীর্ণ হিসেবে চিহ্নিত হয়।</div>
+      </div>
+      <button class="btn btn-danger" id="openRequestFormBtn" type="button" data-i18n="postRequestBtn">+ অনুরোধ পোস্ট করুন</button>
+    </div>
+    <div class="req-list" id="requestList"></div>
+  </div>
+</section>
+
+<section class="block" id="searchSection">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <h2 data-i18n="searchHeading">রক্তদাতা খুঁজুন</h2>
+        <div class="block-sub" data-i18n="searchSub">গ্রুপ, জেলা বা বিভাগ অনুযায়ী ফিল্টার করুন।</div>
+      </div>
+      <button class="btn btn-outline" id="openRegisterFormBtn" type="button" data-i18n="registerAsDonorBtn">দাতা হিসেবে নাম লেখান</button>
+    </div>
+
+    <div class="filter-panel">
+      <div>
+        <label data-i18n="filterBloodGroup">রক্তের গ্রুপ</label>
+        <div class="filter-row" id="bgFilterRow"></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="divisionSelect" data-i18n="filterDivision">বিভাগ</label>
+          <select id="divisionSelect"></select>
+        </div>
+        <div class="field">
+          <label for="districtSelect" data-i18n="filterDistrict">জেলা</label>
+          <select id="districtSelect"></select>
+        </div>
+      </div>
+      <div class="filter-toggle-row">
+        <input type="checkbox" id="eligibleOnlyCheck">
+        <label for="eligibleOnlyCheck" style="margin:0;" data-i18n="filterEligibleOnly">শুধু বর্তমানে দানযোগ্য দাতা দেখান</label>
+      </div>
+      <div class="filter-toggle-row">
+        <input type="checkbox" id="availableNowCheck">
+        <label for="availableNowCheck" style="margin:0;" data-i18n="filterAvailableNow">শুধু "এখনই উপলব্ধ" দাতা দেখান</label>
+      </div>
+
+      <div class="location-card">
+        <div class="location-card-head">📍 <span data-i18n="locCardTitle">দূরত্ব অনুযায়ী খুঁজুন (ঐচ্ছিক)</span></div>
+        <div class="location-methods">
+          <button class="btn btn-outline location-method-btn" id="useLocationBtn" type="button">
+            <span id="useLocationBtnIcon">📡</span> <span data-i18n="useMyLocation">আমার অবস্থান ব্যবহার করুন</span>
+          </button>
+          <span class="location-or" data-i18n="orWord">অথবা</span>
+          <select id="manualLocationSelect" class="location-method-select">
+            <option value="" data-i18n="locManualPlaceholder">জেলা নির্বাচন করুন</option>
+          </select>
+        </div>
+        <div id="locationStatus" class="location-status"></div>
+        <button class="location-clear" id="clearLocationBtn" type="button" style="display:none;" data-i18n="clearLocation">✕ অবস্থান মুছুন</button>
+        <div class="field" style="margin:0;">
+          <label for="radiusSelect" data-i18n="filterRadius">দূরত্ব সীমা</label>
+          <select id="radiusSelect">
+            <option value="" data-i18n="radiusAny">যেকোনো দূরত্ব</option>
+            <option value="5">5 km</option>
+            <option value="10">10 km</option>
+            <option value="25">25 km</option>
+            <option value="50">50 km</option>
+            <option value="100">100 km</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn-ghost" id="clearFiltersBtn" type="button" data-i18n="clearFilters">সব ফিল্টার মুছুন</button>
+      </div>
+    </div>
+
+    <div class="donor-grid" id="donorGrid"></div>
+  </div>
+</section>
+
+<section class="block" id="mapSection">
+  <div class="container">
+    <div class="block-head">
+      <div>
+        <h2 data-i18n="mapHeading">বিভাগ অনুযায়ী দাতার সংখ্যা</h2>
+        <div class="block-sub" data-i18n="mapSub">একটি বিভাগ নির্বাচন করলে তা ফিল্টার হিসেবে কাজ করবে।</div>
+      </div>
+      <div class="map-mode-row">
+        <button class="chip" id="mapModeDonors" type="button" aria-pressed="true" data-i18n="mapModeDonors">দাতার ঘনত্ব</button>
+        <button class="chip" id="mapModeDemand" type="button" aria-pressed="false" data-i18n="mapModeDemand">চাহিদার তাপমাত্রা</button>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <div class="map-svg-box">
+        <svg viewBox="0 0 340 300" style="width:100%;height:auto;max-height:340px;" id="divisionMap" role="group" aria-label="Bangladesh division map"></svg>
+      </div>
+      <div class="map-legend" id="mapLegend"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="container">
+    <p data-i18n="footerNote">এটি একটি কমিউনিটি-পরিচালিত প্ল্যাটফর্ম। এখানে থাকা তথ্যের সঠিকতা যাচাই করা হয় না — রক্তদানের আগে অবশ্যই চিকিৎসকীয় পরামর্শ নিন। ৪-মাসের কুলডাউন কেবল একটি সাধারণ নির্দেশিকা, চিকিৎসাগত পরীক্ষার বিকল্প নয়।</p>
+  </div>
+</footer>
+</div>
+
+<div id="adminDashboard" class="admin-dashboard">
+  <div class="admin-dash-top">
+    <div class="admin-dash-title">🛠️ <span data-i18n="adminDashTitle">অ্যাডমিন ড্যাশবোর্ড</span> <span class="tag">ADMIN</span></div>
+    <div class="admin-dash-actions">
+      <button id="adminDashBack" type="button" data-i18n="adminBackToSite">← মূল সাইটে ফিরুন</button>
+      <button id="adminDashLogout" type="button" data-i18n="logoutBtn">লগআউট</button>
+    </div>
+  </div>
+  <div class="admin-dash-nav" id="adminDashNav">
+    <button class="active" data-admin-tab="overview" data-i18n="adminTabOverview">ওভারভিউ</button>
+    <button data-admin-tab="donors" data-i18n="adminTabDonors">দাতা</button>
+    <button data-admin-tab="requests" data-i18n="adminTabRequests">অনুরোধ</button>
+    <button data-admin-tab="users" data-i18n="adminTabUsers">ইউজার</button>
+    <button data-admin-tab="reports" data-i18n="adminTabReports">রিপোর্ট</button>
+  </div>
+  <div class="admin-dash-body">
+    <div class="container" id="adminDashContent"></div>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ DATA ============ */
+const DIVISIONS = {
+  dhaka:{bn:"ঢাকা",en:"Dhaka",x:150,y:130,districts:["dhaka","faridpur","gazipur","gopalganj","kishoreganj","madaripur","manikganj","munshiganj","narayanganj","narsingdi","rajbari","shariatpur","tangail"]},
+  chattogram:{bn:"চট্টগ্রাম",en:"Chattogram",x:250,y:210,districts:["bandarban","brahmanbaria","chandpur","chattogram","cumilla","coxsbazar","feni","khagrachhari","lakshmipur","noakhali","rangamati"]},
+  rajshahi:{bn:"রাজশাহী",en:"Rajshahi",x:60,y:110,districts:["bogura","chapainawabganj","joypurhat","naogaon","natore","pabna","rajshahi","sirajganj"]},
+  khulna:{bn:"খুলনা",en:"Khulna",x:70,y:210,districts:["bagerhat","chuadanga","jashore","jhenaidah","khulna","kushtia","magura","meherpur","narail","satkhira"]},
+  barishal:{bn:"বরিশাল",en:"Barishal",x:150,y:245,districts:["barguna","barishal","bhola","jhalokati","patuakhali","pirojpur"]},
+  sylhet:{bn:"সিলেট",en:"Sylhet",x:270,y:80,districts:["habiganj","moulvibazar","sunamganj","sylhet"]},
+  rangpur:{bn:"রংপুর",en:"Rangpur",x:90,y:40,districts:["dinajpur","gaibandha","kurigram","lalmonirhat","nilphamari","panchagarh","rangpur","thakurgaon"]},
+  mymensingh:{bn:"ময়মনসিংহ",en:"Mymensingh",x:190,y:55,districts:["jamalpur","mymensingh","netrokona","sherpur"]}
+};
+const DISTRICT_NAMES = {
+  dhaka:{bn:"ঢাকা",en:"Dhaka"},faridpur:{bn:"ফরিদপুর",en:"Faridpur"},gazipur:{bn:"গাজীপুর",en:"Gazipur"},
+  gopalganj:{bn:"গোপালগঞ্জ",en:"Gopalganj"},kishoreganj:{bn:"কিশোরগঞ্জ",en:"Kishoreganj"},madaripur:{bn:"মাদারীপুর",en:"Madaripur"},
+  manikganj:{bn:"মানিকগঞ্জ",en:"Manikganj"},munshiganj:{bn:"মুন্সিগঞ্জ",en:"Munshiganj"},narayanganj:{bn:"নারায়ণগঞ্জ",en:"Narayanganj"},
+  narsingdi:{bn:"নরসিংদী",en:"Narsingdi"},rajbari:{bn:"রাজবাড়ী",en:"Rajbari"},shariatpur:{bn:"শরীয়তপুর",en:"Shariatpur"},tangail:{bn:"টাঙ্গাইল",en:"Tangail"},
+  bandarban:{bn:"বান্দরবান",en:"Bandarban"},brahmanbaria:{bn:"ব্রাহ্মণবাড়িয়া",en:"Brahmanbaria"},chandpur:{bn:"চাঁদপুর",en:"Chandpur"},
+  chattogram:{bn:"চট্টগ্রাম",en:"Chattogram"},cumilla:{bn:"কুমিল্লা",en:"Cumilla"},coxsbazar:{bn:"কক্সবাজার",en:"Cox's Bazar"},
+  feni:{bn:"ফেনী",en:"Feni"},khagrachhari:{bn:"খাগড়াছড়ি",en:"Khagrachhari"},lakshmipur:{bn:"লক্ষ্মীপুর",en:"Lakshmipur"},
+  noakhali:{bn:"নোয়াখালী",en:"Noakhali"},rangamati:{bn:"রাঙামাটি",en:"Rangamati"},
+  bogura:{bn:"বগুড়া",en:"Bogura"},chapainawabganj:{bn:"চাঁপাইনবাবগঞ্জ",en:"Chapainawabganj"},joypurhat:{bn:"জয়পুরহাট",en:"Joypurhat"},
+  naogaon:{bn:"নওগাঁ",en:"Naogaon"},natore:{bn:"নাটোর",en:"Natore"},pabna:{bn:"পাবনা",en:"Pabna"},rajshahi:{bn:"রাজশাহী",en:"Rajshahi"},sirajganj:{bn:"সিরাজগঞ্জ",en:"Sirajganj"},
+  bagerhat:{bn:"বাগেরহাট",en:"Bagerhat"},chuadanga:{bn:"চুয়াডাঙ্গা",en:"Chuadanga"},jashore:{bn:"যশোর",en:"Jashore"},jhenaidah:{bn:"ঝিনাইদহ",en:"Jhenaidah"},
+  khulna:{bn:"খুলনা",en:"Khulna"},kushtia:{bn:"কুষ্টিয়া",en:"Kushtia"},magura:{bn:"মাগুরা",en:"Magura"},meherpur:{bn:"মেহেরপুর",en:"Meherpur"},
+  narail:{bn:"নড়াইল",en:"Narail"},satkhira:{bn:"সাতক্ষীরা",en:"Satkhira"},
+  barguna:{bn:"বরগুনা",en:"Barguna"},barishal:{bn:"বরিশাল",en:"Barishal"},bhola:{bn:"ভোলা",en:"Bhola"},jhalokati:{bn:"ঝালকাঠি",en:"Jhalokati"},
+  patuakhali:{bn:"পটুয়াখালী",en:"Patuakhali"},pirojpur:{bn:"পিরোজপুর",en:"Pirojpur"},
+  habiganj:{bn:"হবিগঞ্জ",en:"Habiganj"},moulvibazar:{bn:"মৌলভীবাজার",en:"Moulvibazar"},sunamganj:{bn:"সুনামগঞ্জ",en:"Sunamganj"},sylhet:{bn:"সিলেট",en:"Sylhet"},
+  dinajpur:{bn:"দিনাজপুর",en:"Dinajpur"},gaibandha:{bn:"গাইবান্ধা",en:"Gaibandha"},kurigram:{bn:"কুড়িগ্রাম",en:"Kurigram"},lalmonirhat:{bn:"লালমনিরহাট",en:"Lalmonirhat"},
+  nilphamari:{bn:"নীলফামারী",en:"Nilphamari"},panchagarh:{bn:"পঞ্চগড়",en:"Panchagarh"},rangpur:{bn:"রংপুর",en:"Rangpur"},thakurgaon:{bn:"ঠাকুরগাঁও",en:"Thakurgaon"},
+  jamalpur:{bn:"জামালপুর",en:"Jamalpur"},mymensingh:{bn:"ময়মনসিংহ",en:"Mymensingh"},netrokona:{bn:"নেত্রকোণা",en:"Netrokona"},sherpur:{bn:"শেরপুর",en:"Sherpur"}
+};
+const BLOOD_GROUPS = ["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+const DISTRICT_TO_DIVISION = {};
+Object.keys(DIVISIONS).forEach(divKey=>DIVISIONS[divKey].districts.forEach(d=>DISTRICT_TO_DIVISION[d]=divKey));
+
+/* Approximate district-centroid coordinates (for distance estimation only — not precise GIS data) */
+const DISTRICT_COORDS = {
+  dhaka:[23.8103,90.4125], faridpur:[23.6070,89.8429], gazipur:[23.9999,90.4203], gopalganj:[23.0050,89.8266],
+  kishoreganj:[24.4449,90.7766], madaripur:[23.1641,90.1897], manikganj:[23.8644,89.9977], munshiganj:[23.5422,90.5305],
+  narayanganj:[23.6238,90.5000], narsingdi:[23.9322,90.7150], rajbari:[23.7574,89.6444], shariatpur:[23.2423,90.4348],
+  tangail:[24.2513,89.9167],
+  bandarban:[22.1953,92.2184], brahmanbaria:[23.9571,91.1119], chandpur:[23.2333,90.6500], chattogram:[22.3569,91.7832],
+  cumilla:[23.4607,91.1809], coxsbazar:[21.4272,92.0058], feni:[23.0159,91.3976], khagrachhari:[23.1193,91.9847],
+  lakshmipur:[22.9440,90.8280], noakhali:[22.8696,91.0995], rangamati:[22.6533,92.1786],
+  bogura:[24.8465,89.3773], chapainawabganj:[24.5965,88.2775], joypurhat:[25.0968,89.0227], naogaon:[24.7936,88.9318],
+  natore:[24.4206,88.9873], pabna:[24.0064,89.2372], rajshahi:[24.3745,88.6042], sirajganj:[24.4533,89.7000],
+  bagerhat:[22.6602,89.7895], chuadanga:[23.6402,88.8410], jashore:[23.1667,89.2167], jhenaidah:[23.5450,89.1539],
+  khulna:[22.8456,89.5403], kushtia:[23.9013,89.1206], magura:[23.4873,89.4198], meherpur:[23.7622,88.6318],
+  narail:[23.1725,89.5126], satkhira:[22.7185,89.0705],
+  barguna:[22.0953,90.1121], barishal:[22.7010,90.3535], bhola:[22.6859,90.6482], jhalokati:[22.6406,90.1987],
+  patuakhali:[22.3596,90.3296], pirojpur:[22.5841,89.9720],
+  habiganj:[24.3745,91.4155], moulvibazar:[24.4829,91.7774], sunamganj:[25.0658,91.3950], sylhet:[24.8949,91.8687],
+  dinajpur:[25.6279,88.6332], gaibandha:[25.3288,89.5289], kurigram:[25.8054,89.6362], lalmonirhat:[25.9923,89.2847],
+  nilphamari:[25.9313,88.8563], panchagarh:[26.3411,88.5541], rangpur:[25.7439,89.2752], thakurgaon:[26.0336,88.4616],
+  jamalpur:[24.9375,89.9370], mymensingh:[24.7471,90.4203], netrokona:[24.8709,90.7280], sherpur:[25.0206,90.0153]
+};
+function haversineKm(lat1, lon1, lat2, lon2){
+  const R = 6371;
+  const dLat = (lat2-lat1)*Math.PI/180;
+  const dLon = (lon2-lon1)*Math.PI/180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R * 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+function districtDistanceKm(fromLat, fromLon, districtKey){
+  const c = DISTRICT_COORDS[districtKey];
+  if(!c) return null;
+  return haversineKm(fromLat, fromLon, c[0], c[1]);
+}
+
+const I18N = {
+  bn:{
+    heroTitle:"যখন প্রতিটি মিনিট গুরুত্বপূর্ণ, দ্রুত রক্তদাতা খুঁজুন",
+    heroLede:"রক্তের গ্রুপ ও এলাকা দিয়ে খুঁজুন, নিজে দাতা হিসেবে নাম লেখান, অথবা জরুরি প্রয়োজনে সবার কাছে অনুরোধ পাঠান — কোনো অ্যাকাউন্ট ছাড়াই।",
+    heroBtnSearch:"দাতা খুঁজুন", heroBtnRegister:"দাতা হিসেবে যুক্ত হোন", heroBtnRequest:"জরুরি অনুরোধ পোস্ট করুন",
+    urgentHeading:"সক্রিয় জরুরি অনুরোধ", urgentSub:"অনুরোধগুলো পোস্ট করার ৭২ ঘণ্টা পর স্বয়ংক্রিয়ভাবে মেয়াদোত্তীর্ণ হিসেবে চিহ্নিত হয়।",
+    postRequestBtn:"+ অনুরোধ পোস্ট করুন", noRequests:"এই মুহূর্তে কোনো সক্রিয় অনুরোধ নেই।",
+    searchHeading:"রক্তদাতা খুঁজুন", searchSub:"গ্রুপ, জেলা বা বিভাগ অনুযায়ী ফিল্টার করুন।",
+    registerAsDonorBtn:"দাতা হিসেবে নাম লেখান",
+    filterBloodGroup:"রক্তের গ্রুপ", filterDivision:"বিভাগ", filterDistrict:"জেলা", filterEligibleOnly:"শুধু বর্তমানে দানযোগ্য দাতা দেখান",
+    clearFilters:"সব ফিল্টার মুছুন", allDivisions:"সব বিভাগ", allDistricts:"সব জেলা",
+    noDonors:"এই ফিল্টারে কোনো দাতা পাওয়া যায়নি। ভিন্ন ফিল্টার চেষ্টা করুন, অথবা নিজেই দাতা হিসেবে যুক্ত হোন।",
+    mapHeading:"বিভাগ অনুযায়ী দাতার সংখ্যা", mapSub:"একটি বিভাগ নির্বাচন করলে তা ফিল্টার হিসেবে কাজ করবে।",
+    footerNote:"এটি একটি কমিউনিটি-পরিচালিত প্ল্যাটফর্ম। এখানে থাকা তথ্যের সঠিকতা যাচাই করা হয় না — রক্তদানের আগে অবশ্যই চিকিৎসকীয় পরামর্শ নিন। ৪-মাসের কুলডাউন কেবল একটি সাধারণ নির্দেশিকা, চিকিৎসাগত পরীক্ষার বিকল্প নয়।",
+    brand:"জরুরি রক্ত চক্র", brandSub:"Emergency Blood Circle",
+    eligibleNow:"এখন দানযোগ্য", cooldownUntil:"কুলডাউন চলছে",
+    call:"কল করুন", edit:"সম্পাদনা", del:"মুছুন", resolve:"সমাধান হয়েছে",
+    registeredOn:"নিবন্ধন", viewMap:"ম্যাপ দেখুন",
+    critical:"জরুরি", moderate:"সাধারণ", expired:"মেয়াদোত্তীর্ণ", units:"ইউনিট",
+    formRegisterTitle:"রক্তদাতা নিবন্ধন", formEditDonorTitle:"দাতার তথ্য সম্পাদনা",
+    fName:"পূর্ণ নাম", fPhone:"মোবাইল নম্বর", fBloodGroup:"রক্তের গ্রুপ", fDistrict:"জেলা", fArea:"এলাকা/থানা (ঐচ্ছিক)",
+    fLastDonation:"সর্বশেষ রক্তদানের তারিখ (থাকলে)", fRemindMe:"কুলডাউন শেষ হলে ব্রাউজার নোটিফিকেশনে মনে করিয়ে দিন",
+    save:"সংরক্ষণ করুন", cancel:"বাতিল", update:"হালনাগাদ করুন",
+    reqBoardTitle:"জরুরি অনুরোধ পোস্ট করুন", formEditReqTitle:"অনুরোধ সম্পাদনা",
+    fPatientName:"রোগীর নাম", fUrgency:"জরুরি মাত্রা", fUnits:"প্রয়োজনীয় ইউনিট", fHospital:"হাসপাতালের নাম",
+    fMapLink:"গুগল ম্যাপ লিংক (ঐচ্ছিক)", fContactPhone:"যোগাযোগের নম্বর", fNote:"অতিরিক্ত নোট (ঐচ্ছিক)",
+    postRequest:"অনুরোধ পোস্ট করুন",
+    errRequired:"এই তথ্যটি দেওয়া আবশ্যক।", errPhone:"সঠিক ফরম্যাটে একটি বাংলাদেশি মোবাইল নম্বর দিন (যেমন 017XXXXXXXX)।",
+    successDonorAdd:"ধন্যবাদ! আপনি সফলভাবে দাতা তালিকায় যুক্ত হয়েছেন।", successDonorUpdate:"তথ্য হালনাগাদ হয়েছে।",
+    successReqAdd:"আপনার জরুরি অনুরোধ পোস্ট হয়েছে।", successReqUpdate:"অনুরোধ হালনাগাদ হয়েছে।",
+    confirmDeleteDonor:"আপনি কি নিশ্চিতভাবে এই দাতার তথ্য মুছে ফেলতে চান?", confirmResolveReq:"এই অনুরোধটিকে সমাধান হয়েছে হিসেবে চিহ্নিত করবেন? এটি তালিকা থেকে সরিয়ে দেওয়া হবে।",
+    yesDelete:"হ্যাঁ, মুছুন", yesResolve:"হ্যাঁ, সরিয়ে দিন",
+    phoneDisclosure:"বিঃদ্রঃ আপনার মোবাইল নম্বর সরাসরি যোগাযোগের সুবিধার জন্য সকল ভিজিটরের কাছে দৃশ্যমান থাকবে।",
+    ownerNote:"সম্পাদনা/মুছে ফেলার সুবিধা শুধুমাত্র এই ব্রাউজার থেকে পাওয়া যায়, কোনো অ্যাকাউন্ট যাচাইয়ের মাধ্যমে নয়।",
+    storageWarn:"সংরক্ষণ সার্ভারে সাময়িক সমস্যা হচ্ছে — আপাতত এই সেশনের জন্য তথ্য দেখানো হচ্ছে।",
+    jsErr:"একটি অপ্রত্যাশিত সমস্যা হয়েছে। পাতাটি রিলোড করার চেষ্টা করুন।",
+    filterAvailableNow:'শুধু "এখনই উপলব্ধ" দাতা দেখান', filterRadius:"দূরত্ব (আনুমানিক)", radiusAny:"যেকোনো দূরত্ব",
+    filterMyLocation:"আপনার অবস্থান", useMyLocation:"📍 আমার অবস্থান ব্যবহার করুন",
+    locFetching:"অবস্থান খোঁজা হচ্ছে...", locFound:"অবস্থান পাওয়া গেছে — এখন দূরত্ব দেখানো হবে।",
+    locDenied:"এই ব্রাউজার বা এমবেডেড ভিউ থেকে সরাসরি অবস্থান পাওয়া যায়নি। নিচে থেকে আপনার জেলা বেছে নিন — সেটা দিয়েই দূরত্ব হিসাব করা হবে।",
+    locNotSupported:"এই ব্রাউজার লোকেশন সাপোর্ট করে না।",
+    kmAway:"কিমি দূরে",
+    locManualLabel:"অথবা আপনার জেলা বেছে নিন (অবস্থানের বিকল্প)", locManualPlaceholder:"জেলা নির্বাচন করুন",
+    locManualSet:"আপনার জেলা অনুযায়ী দূরত্ব দেখানো হচ্ছে।",
+    locCardTitle:"দূরত্ব অনুযায়ী খুঁজুন (ঐচ্ছিক)", orWord:"অথবা", clearLocation:"✕ অবস্থান মুছুন",
+    copyNumber:"নম্বর কপি করুন", copied:"কপি হয়েছে!", copiedToast:"নম্বর কপি হয়েছে — এখন পেস্ট করে কল করতে পারবেন।",
+    loginBtn:"লগইন / রেজিস্টার", logoutBtn:"লগআউট", welcomeUser:"স্বাগতম",
+    authLoginTab:"লগইন", authRegisterTab:"অ্যাকাউন্ট খুলুন",
+    fUsername:"ইউজারনেম", fPassword:"পাসওয়ার্ড", fPasswordConfirm:"পাসওয়ার্ড আবার লিখুন",
+    authLoginBtn:"লগইন করুন", authRegisterBtn:"অ্যাকাউন্ট তৈরি করুন",
+    authUsernameTaken:"এই ইউজারনেমটি আগে থেকেই ব্যবহৃত হচ্ছে।", authUsernameShort:"ইউজারনেম কমপক্ষে ৩ অক্ষরের হতে হবে।",
+    authPasswordShort:"পাসওয়ার্ড কমপক্ষে ৪ অক্ষরের হতে হবে।", authPasswordMismatch:"দুটো পাসওয়ার্ড মিলছে না।",
+    authInvalidLogin:"ইউজারনেম বা পাসওয়ার্ড ভুল।", authRegisterSuccess:"অ্যাকাউন্ট তৈরি হয়েছে, স্বাগতম!",
+    authLoginSuccess:"লগইন সফল হয়েছে!", authLogoutDone:"লগআউট হয়েছে।",
+    authRequiredNote:"পোস্ট করতে বা নিজের এন্ট্রি সম্পাদনা করতে লগইন করা প্রয়োজন।",
+    authRequiredToPost:"পোস্ট করার আগে অনুগ্রহ করে লগইন করুন বা অ্যাকাউন্ট তৈরি করুন।",
+    authSecurityNote:"⚠️ এটি একটি হালকা, ব্রাউজার-ভিত্তিক লগইন সিস্টেম — সার্ভার-যাচাইকৃত নিরাপত্তা নয়। শক্তিশালী/অনন্য পাসওয়ার্ড ব্যবহার করার পরামর্শ দিচ্ছি না, শুধু পরিচয়/মালিকানার জন্য।",
+    reportBtn:"রিপোর্ট করুন", rateLimitMsg:"আপনি অল্প সময়ে অনেকগুলো পোস্ট করেছেন। কিছুক্ষণ পর আবার চেষ্টা করুন।",
+    duplicatePhoneMsg:"এই নম্বর দিয়ে একটু আগেই একটা পোস্ট হয়েছে। কয়েক মিনিট পর আবার চেষ্টা করুন।",
+    flagOwnPost:"নিজের পোস্ট নিজে রিপোর্ট করা যাবে না।", flagAlready:"আপনি ইতিমধ্যে এই পোস্টটি রিপোর্ট করেছেন।",
+    flagSuccess:"রিপোর্ট করা হয়েছে। ধন্যবাদ — একাধিক রিপোর্ট পড়লে পোস্টটি স্বয়ংক্রিয়ভাবে লুকানো হবে।",
+    authGateSub:"চালিয়ে যেতে অনুগ্রহ করে লগইন করুন বা একটি অ্যাকাউন্ট তৈরি করুন।",
+    adminCodeLabel:"অ্যাডমিন কোড (ঐচ্ছিক)", authRegisterSuccessAdmin:"অ্যাডমিন হিসেবে প্রবেশ সফল হয়েছে, স্বাগতম!",
+    adminAccessLink:"অ্যাডমিন অ্যাক্সেস", adminCodeLabel2:"অ্যাডমিন কোড", adminCodeWrong:"অ্যাডমিন কোডটি সঠিক নয়।",
+    adminAccessBtn:"অ্যাডমিন হিসেবে প্রবেশ করুন", backToLogin:"সাধারণ লগইনে ফিরে যান",
+    adminAccessNote:"এটি সাধারণ ইউজারদের জন্য নয়। অ্যাডমিন কোড জানা থাকলেই শুধু এখানে প্রবেশ করুন — নতুন ইউজারনেম দিলে নতুন অ্যাডমিন অ্যাকাউন্ট তৈরি হবে, আগে থেকে থাকা ইউজারনেম দিলে সেটি অ্যাডমিনে উন্নীত হবে।",
+    adminPortalKicker:"অ্যাডমিন পোর্টাল",
+    adminDashTitle:"অ্যাডমিন ড্যাশবোর্ড", adminBackToSite:"← মূল সাইটে ফিরুন",
+    adminTabOverview:"ওভারভিউ", adminTabDonors:"দাতা", adminTabRequests:"অনুরোধ", adminTabUsers:"ইউজার", adminTabReports:"রিপোর্ট",
+    colName:"নাম", colPhone:"ফোন", colBloodGroup:"গ্রুপ", colDistrict:"জেলা", colStatus:"স্ট্যাটাস", colFlags:"রিপোর্ট",
+    colActions:"অ্যাকশন", colPatient:"রোগী", colHospital:"হাসপাতাল", colUrgency:"জরুরি মাত্রা", colUsername:"ইউজারনেম",
+    colRole:"ভূমিকা", colJoined:"যোগদান", colPosts:"পোস্ট",
+    adminPromote:"অ্যাডমিন করুন", adminDemote:"অ্যাডমিন বাতিল", adminDeleteUser:"ইউজার মুছুন",
+    adminRoleAdmin:"অ্যাডমিন", adminRoleUser:"সাধারণ ইউজার",
+    confirmPromote:"এই ইউজারকে অ্যাডমিন বানাতে চান?", confirmDemote:"এই ইউজারের অ্যাডমিন ক্ষমতা বাতিল করতে চান?",
+    confirmDeleteUser:"এই ইউজার অ্যাকাউন্টটি স্থায়ীভাবে মুছে ফেলতে চান? (তাদের পোস্টগুলো থেকে যাবে)",
+    cannotModifySelf:"আপনি নিজের অ্যাকাউন্টে এই পরিবর্তন করতে পারবেন না।",
+    adminSearchPlaceholder:"নাম, ফোন বা জেলা দিয়ে খুঁজুন...", adminNoResults:"কোনো ফলাফল পাওয়া যায়নি।",
+    yesConfirm:"হ্যাঁ, নিশ্চিত", actionDone:"সম্পন্ন হয়েছে।",
+    adminPanelBtn:"অ্যাডমিন প্যানেল", adminStatDonors:"মোট দাতা", adminStatRequests:"মোট অনুরোধ",
+    adminStatUsers:"মোট ইউজার", adminStatFlagged:"রিপোর্ট হওয়া পোস্ট", adminFlaggedSectionTitle:"রিপোর্ট হওয়া পোস্টসমূহ",
+    adminNoFlagged:"এখন পর্যন্ত কোনো পোস্ট রিপোর্ট হয়নি।", adminHiddenTag:"লুকানো আছে", adminFlagCount:"রিপোর্ট সংখ্যা",
+    unhideBtn:"আনহাইড করুন", permDeleteBtn:"স্থায়ীভাবে মুছুন", unhideDone:"পোস্টটি আবার দৃশ্যমান করা হয়েছে।",
+    permDeleteDone:"পোস্টটি স্থায়ীভাবে মুছে ফেলা হয়েছে।", confirmPermDelete:"আপনি কি নিশ্চিতভাবে এই পোস্টটি স্থায়ীভাবে মুছে ফেলতে চান? এটি ফিরিয়ে আনা যাবে না।",
+    statusNow:"এখনই উপলব্ধ", statusLater:"পরে উপলব্ধ হবে", statusOff:"এই মুহূর্তে উপলব্ধ নন",
+    fAvailability:"বর্তমান উপলব্ধতা", changeStatus:"স্ট্যাটাস পরিবর্তন করুন",
+    mapModeDonors:"দাতার ঘনত্ব", mapModeDemand:"চাহিদার তাপমাত্রা",
+    legendHigh:"উচ্চ চাহিদা", legendMed:"মাঝারি চাহিদা", legendLow:"কম/কোনো চাহিদা নেই",
+    bestMatch:"সেরা মিল দাতা", bestMatchNone:"এই মুহূর্তে উপযুক্ত কোনো দাতা পাওয়া যায়নি।",
+    priorityLabel:"অগ্রাধিকার স্কোর",
+    remaining:"বাকি",
+    approxNote:"* দূরত্ব জেলার কেন্দ্রবিন্দু থেকে আনুমানিক হিসাব, সঠিক GPS অবস্থান নয়।"
+  },
+  en:{
+    heroTitle:"When every minute counts, find a donor fast",
+    heroLede:"Search by blood group and area, register yourself as a donor, or broadcast an urgent request to the whole community — no account needed.",
+    heroBtnSearch:"Search donors", heroBtnRegister:"Become a donor", heroBtnRequest:"Post an urgent request",
+    urgentHeading:"Active urgent requests", urgentSub:"Requests are automatically marked expired 72 hours after posting.",
+    postRequestBtn:"+ Post a request", noRequests:"There are no active requests right now.",
+    searchHeading:"Search blood donors", searchSub:"Filter by group, district, or division.",
+    registerAsDonorBtn:"Register as a donor",
+    filterBloodGroup:"Blood group", filterDivision:"Division", filterDistrict:"District", filterEligibleOnly:"Show only currently eligible donors",
+    clearFilters:"Clear all filters", allDivisions:"All divisions", allDistricts:"All districts",
+    noDonors:"No donors match these filters. Try different filters, or register as a donor yourself.",
+    mapHeading:"Donor count by division", mapSub:"Selecting a division filters the search below.",
+    footerNote:"This is a community-operated platform. Information here is not verified — always seek medical advice before donating. The 4-month cooldown is a general guideline only, not a substitute for medical screening.",
+    brand:"Emergency Blood Circle", brandSub:"জরুরি রক্ত চক্র",
+    eligibleNow:"Eligible now", cooldownUntil:"Cooldown until",
+    call:"Call", edit:"Edit", del:"Delete", resolve:"Resolve",
+    registeredOn:"Registered", viewMap:"View on map",
+    critical:"Critical", moderate:"Moderate", expired:"Expired", units:"units",
+    formRegisterTitle:"Donor registration", formEditDonorTitle:"Edit donor details",
+    fName:"Full name", fPhone:"Mobile number", fBloodGroup:"Blood group", fDistrict:"District", fArea:"Area / thana (optional)",
+    fLastDonation:"Last donation date (if any)", fRemindMe:"Remind me by browser notification when my cooldown ends",
+    save:"Save", cancel:"Cancel", update:"Update",
+    reqBoardTitle:"Post an urgent request", formEditReqTitle:"Edit request",
+    fPatientName:"Patient name", fUrgency:"Urgency level", fUnits:"Units needed", fHospital:"Hospital name",
+    fMapLink:"Google Maps link (optional)", fContactPhone:"Contact number", fNote:"Additional note (optional)",
+    postRequest:"Post request",
+    errRequired:"This field is required.", errPhone:"Enter a valid Bangladeshi mobile number (e.g. 017XXXXXXXX).",
+    successDonorAdd:"Thank you! You've been added to the donor directory.", successDonorUpdate:"Your details have been updated.",
+    successReqAdd:"Your urgent request has been posted.", successReqUpdate:"Request updated.",
+    confirmDeleteDonor:"Are you sure you want to delete this donor entry?", confirmResolveReq:"Mark this request as resolved? It will be removed from the list.",
+    yesDelete:"Yes, delete", yesResolve:"Yes, remove",
+    phoneDisclosure:"Note: your mobile number will be visible to all visitors so they can contact you directly.",
+    ownerNote:"Edit/delete access is only available from this same browser, not through any account verification.",
+    storageWarn:"Storage is temporarily having trouble — showing data for this session only.",
+    jsErr:"Something unexpected went wrong. Try reloading the page.",
+    filterAvailableNow:'Show only "available now" donors', filterRadius:"Distance (approximate)", radiusAny:"Any distance",
+    filterMyLocation:"Your location", useMyLocation:"📍 Use my location",
+    locFetching:"Finding your location...", locFound:"Location found — showing distances now.",
+    locDenied:"Couldn't get your location directly from this browser or embedded view. Pick your district below instead — distance will be estimated from that.",
+    locNotSupported:"This browser doesn't support location.",
+    kmAway:"km away",
+    locManualLabel:"Or pick your district (location alternative)", locManualPlaceholder:"Select district",
+    locManualSet:"Showing distances based on your selected district.",
+    locCardTitle:"Search by distance (optional)", orWord:"Or", clearLocation:"✕ Clear location",
+    copyNumber:"Copy number", copied:"Copied!", copiedToast:"Number copied — you can paste it to call.",
+    loginBtn:"Log in / Register", logoutBtn:"Log out", welcomeUser:"Welcome",
+    authLoginTab:"Log in", authRegisterTab:"Create account",
+    fUsername:"Username", fPassword:"Password", fPasswordConfirm:"Confirm password",
+    authLoginBtn:"Log in", authRegisterBtn:"Create account",
+    authUsernameTaken:"That username is already taken.", authUsernameShort:"Username must be at least 3 characters.",
+    authPasswordShort:"Password must be at least 4 characters.", authPasswordMismatch:"Passwords don't match.",
+    authInvalidLogin:"Incorrect username or password.", authRegisterSuccess:"Account created, welcome!",
+    authLoginSuccess:"Logged in successfully!", authLogoutDone:"Logged out.",
+    authRequiredNote:"You need to log in to post or edit your own entries.",
+    authRequiredToPost:"Please log in or create an account before posting.",
+    authSecurityNote:"⚠️ This is a lightweight, browser-based login — not server-verified security. Don't reuse a sensitive password; it's for identity/ownership only.",
+    reportBtn:"Report", rateLimitMsg:"You've posted several times in a short period. Please try again later.",
+    duplicatePhoneMsg:"A post with this number was just made. Please try again in a few minutes.",
+    flagOwnPost:"You can't report your own post.", flagAlready:"You've already reported this post.",
+    flagSuccess:"Reported. Thanks — the post will be auto-hidden after multiple reports.",
+    authGateSub:"Please log in or create an account to continue.",
+    adminCodeLabel:"Admin code (optional)", authRegisterSuccessAdmin:"Admin access granted, welcome!",
+    adminAccessLink:"Admin access", adminCodeLabel2:"Admin code", adminCodeWrong:"That admin code is incorrect.",
+    adminAccessBtn:"Enter as admin", backToLogin:"Back to normal login",
+    adminAccessNote:"This isn't for regular users. Only enter here if you know the admin code — a new username creates a new admin account, an existing username gets upgraded to admin.",
+    adminPortalKicker:"Admin Portal",
+    adminDashTitle:"Admin Dashboard", adminBackToSite:"← Back to site",
+    adminTabOverview:"Overview", adminTabDonors:"Donors", adminTabRequests:"Requests", adminTabUsers:"Users", adminTabReports:"Reports",
+    colName:"Name", colPhone:"Phone", colBloodGroup:"Group", colDistrict:"District", colStatus:"Status", colFlags:"Reports",
+    colActions:"Actions", colPatient:"Patient", colHospital:"Hospital", colUrgency:"Urgency", colUsername:"Username",
+    colRole:"Role", colJoined:"Joined", colPosts:"Posts",
+    adminPromote:"Make admin", adminDemote:"Remove admin", adminDeleteUser:"Delete user",
+    adminRoleAdmin:"Admin", adminRoleUser:"Regular user",
+    confirmPromote:"Make this user an admin?", confirmDemote:"Remove admin rights from this user?",
+    confirmDeleteUser:"Permanently delete this user account? (their posts remain)",
+    cannotModifySelf:"You can't make this change to your own account.",
+    adminSearchPlaceholder:"Search by name, phone, or district...", adminNoResults:"No results found.",
+    yesConfirm:"Yes, confirm", actionDone:"Done.",
+    adminPanelBtn:"Admin panel", adminStatDonors:"Total donors", adminStatRequests:"Total requests",
+    adminStatUsers:"Total users", adminStatFlagged:"Reported posts", adminFlaggedSectionTitle:"Reported posts",
+    adminNoFlagged:"No posts have been reported yet.", adminHiddenTag:"Hidden", adminFlagCount:"Report count",
+    unhideBtn:"Unhide", permDeleteBtn:"Delete permanently", unhideDone:"The post is visible again.",
+    permDeleteDone:"The post has been permanently deleted.", confirmPermDelete:"Are you sure you want to permanently delete this post? This cannot be undone.",
+    statusNow:"Available now", statusLater:"Available later", statusOff:"Not available right now",
+    fAvailability:"Current availability", changeStatus:"Change status",
+    mapModeDonors:"Donor density", mapModeDemand:"Demand heatmap",
+    legendHigh:"High demand", legendMed:"Medium demand", legendLow:"Low / no demand",
+    bestMatch:"Best-match donors", bestMatchNone:"No suitable donors found right now.",
+    priorityLabel:"Priority score",
+    remaining:"remaining",
+    approxNote:"* Distance is estimated from the district's centroid, not a precise GPS location."
+  }
+};
+
+/* ============ STATE ============ */
+let lang = "bn";
+let theme = "light";
+let donors = [];
+let requests = [];
+let ownedDonorIds = [];
+let ownedRequestIds = [];
+let reminderIds = [];
+let filters = { bloodGroup:null, division:null, district:null, eligibleOnly:false, availableNowOnly:false, radiusKm:null };
+let userLoc = null; // {lat, lng} set once the person allows geolocation or picks a district manually
+let manualLocationDistrict = null;
+let mapMode = "donors"; // "donors" | "demand"
+let users = []; // {id, username, passHash, createdAt, recentPosts:[iso,...]}
+let currentUser = null; // {id, username} of the logged-in browser session, or null
+let editingDonorId = null;
+let editingRequestId = null;
+
+function t(key){ return (I18N[lang] && I18N[lang][key]) || key; }
+
+/* ============ STORAGE HELPERS ============ */
+function withTimeout(promise, ms){
+  return Promise.race([
+    promise,
+    new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")), ms))
+  ]);
+}
+async function storageGet(key, shared){
+  try{
+    const res = await withTimeout(window.storage.get(key, !!shared), 3500);
+    return res ? res.value : null;
+  }catch(e){ console.error("storage get failed", key, e); return null; }
+}
+async function storageSet(key, value, shared){
+  try{
+    window.storage.set(key, value, !!shared).catch(e=>console.error("storage set failed", key, e));
+  }catch(e){ console.error("storage set threw", key, e); }
+}
+
+function daysAgoIso(n){ const d = new Date(); d.setDate(d.getDate()-n); return d.toISOString(); }
+function hoursAgoIso(n){ const d = new Date(); d.setHours(d.getHours()-n); return d.toISOString(); }
+function seedDonors(){
+  return [
+    {id:uid(), name:"রফিকুল ইসলাম", phone:"01711223344", bloodGroup:"O+", district:"dhaka", area:"মিরপুর", lastDonation:null, status:"now", createdAt:daysAgoIso(40)},
+    {id:uid(), name:"সাবরিনা আক্তার", phone:"01822334455", bloodGroup:"A+", district:"gazipur", area:"টঙ্গী", lastDonation:daysAgoIso(20), status:"later", createdAt:daysAgoIso(35)},
+    {id:uid(), name:"ইমরান হোসেন", phone:"01933445566", bloodGroup:"B+", district:"chattogram", area:"পাহাড়তলী", lastDonation:null, status:"now", createdAt:daysAgoIso(30)},
+    {id:uid(), name:"তানভীর আহমেদ", phone:"01644556677", bloodGroup:"O-", district:"cumilla", area:"", lastDonation:daysAgoIso(150), status:"off", createdAt:daysAgoIso(25)},
+    {id:uid(), name:"নুসরাত জাহান", phone:"01555667788", bloodGroup:"AB+", district:"khulna", area:"সোনাডাঙ্গা", lastDonation:null, status:"now", createdAt:daysAgoIso(22)},
+    {id:uid(), name:"মাহমুদুল হাসান", phone:"01766778899", bloodGroup:"B-", district:"rajshahi", area:"", lastDonation:daysAgoIso(10), status:"later", createdAt:daysAgoIso(18)},
+    {id:uid(), name:"ফারহানা ইয়াসমিন", phone:"01877889900", bloodGroup:"A-", district:"sylhet", area:"জিন্দাবাজার", lastDonation:null, status:"now", createdAt:daysAgoIso(15)},
+    {id:uid(), name:"আসিফ মাহমুদ", phone:"01988990011", bloodGroup:"AB-", district:"rangpur", area:"", lastDonation:daysAgoIso(200), status:"now", createdAt:daysAgoIso(12)},
+    {id:uid(), name:"সজীব হাওলাদার", phone:"01699001122", bloodGroup:"O+", district:"barishal", area:"বান্দরোড", lastDonation:null, status:"now", createdAt:daysAgoIso(9)},
+    {id:uid(), name:"রুমানা পারভীন", phone:"01500112233", bloodGroup:"A+", district:"mymensingh", area:"", lastDonation:daysAgoIso(60), status:"later", createdAt:daysAgoIso(5)},
+    {id:uid(), name:"খালেদ সাইফুল্লাহ", phone:"01711998877", bloodGroup:"O+", district:"narayanganj", area:"ফতুল্লা", lastDonation:null, status:"now", createdAt:daysAgoIso(3)},
+    {id:uid(), name:"শাহরিয়ার কবির", phone:"01822887766", bloodGroup:"B+", district:"jashore", area:"", lastDonation:daysAgoIso(5), status:"off", createdAt:daysAgoIso(2)}
+  ];
+}
+function seedRequests(){
+  return [
+    {id:uid(), patientName:"আব্দুল করিম", bloodGroup:"O-", urgency:"Critical", unitsNeeded:2, district:"dhaka", hospital:"ঢাকা মেডিকেল কলেজ হাসপাতাল", hospitalMapLink:null, contactPhone:"01711000011", note:"আজ রাতের মধ্যে প্রয়োজন", createdAt:hoursAgoIso(3)},
+    {id:uid(), patientName:"মরিয়ম বেগম", bloodGroup:"B+", urgency:"Moderate", unitsNeeded:1, district:"chattogram", hospital:"চট্টগ্রাম মেডিকেল কলেজ হাসপাতাল", hospitalMapLink:null, contactPhone:"01822000022", note:"", createdAt:hoursAgoIso(10)},
+    {id:uid(), patientName:"জাহিদুল ইসলাম", bloodGroup:"A+", urgency:"Critical", unitsNeeded:3, district:"sylhet", hospital:"সিলেট এম.এ.জি ওসমানী মেডিকেল কলেজ হাসপাতাল", hospitalMapLink:null, contactPhone:"01933000033", note:"অস্ত্রোপচারের জন্য জরুরি", createdAt:hoursAgoIso(1)}
+  ];
+}
+async function loadAll(){
+  const [donorsRaw, requestsRaw, ownedRaw, prefsRaw, usersRaw, sessionRaw] = await Promise.all([
+    storageGet("donors-data", true),
+    storageGet("requests-data", true),
+    storageGet("owned-ids", false),
+    storageGet("prefs", false),
+    storageGet("users-data", true),
+    storageGet("session", false)
+  ]);
+  try{ donors = donorsRaw ? JSON.parse(donorsRaw) : []; }catch(e){ donors = []; }
+  try{ requests = requestsRaw ? JSON.parse(requestsRaw) : []; }catch(e){ requests = []; }
+  if(donorsRaw === null && donors.length === 0){
+    donors = seedDonors();
+    saveDonors();
+  }
+  if(requestsRaw === null && requests.length === 0){
+    requests = seedRequests();
+    saveRequests();
+  }
+  try{
+    const owned = ownedRaw ? JSON.parse(ownedRaw) : {donors:[], requests:[]};
+    ownedDonorIds = owned.donors || [];
+    ownedRequestIds = owned.requests || [];
+  }catch(e){ ownedDonorIds = []; ownedRequestIds = []; }
+  try{
+    const prefs = prefsRaw ? JSON.parse(prefsRaw) : {};
+    lang = prefs.lang || "bn";
+    theme = prefs.theme || "light";
+    reminderIds = prefs.reminders || [];
+  }catch(e){ /* keep defaults */ }
+  try{ users = usersRaw ? JSON.parse(usersRaw) : []; }catch(e){ users = []; }
+  try{
+    const session = sessionRaw ? JSON.parse(sessionRaw) : null;
+    if(session && session.userId){
+      const u = users.find(u=>u.id === session.userId);
+      currentUser = u ? {id:u.id, username:u.username, isAdmin: !!u.isAdmin} : null;
+    }else{
+      currentUser = null;
+    }
+  }catch(e){ currentUser = null; }
+}
+function saveDonors(){ storageSet("donors-data", JSON.stringify(donors), true); }
+function saveRequests(){ storageSet("requests-data", JSON.stringify(requests), true); }
+function saveOwned(){ storageSet("owned-ids", JSON.stringify({donors:ownedDonorIds, requests:ownedRequestIds}), false); }
+function savePrefs(){ storageSet("prefs", JSON.stringify({lang, theme, reminders:reminderIds}), false); }
+function saveUsers(){ storageSet("users-data", JSON.stringify(users), true); }
+function saveSession(){ storageSet("session", JSON.stringify(currentUser ? {userId:currentUser.id} : null), false); }
+
+/* ============ UTIL ============ */
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+function nowIso(){ return new Date().toISOString(); }
+function normalizePhone(raw){
+  let p = (raw||"").replace(/[\s\-]/g,"");
+  if(p.startsWith("+880")) p = "0"+p.slice(4);
+  else if(p.startsWith("880")) p = "0"+p.slice(3);
+  if(/^0\d{10}$/.test(p)) return p;
+  return null;
+}
+
+/* ============ ANTI-SPAM / MODERATION ============ */
+const MAX_DONOR_POSTS_PER_HOUR = 3;
+const MAX_REQUEST_POSTS_PER_HOUR = 5;
+const DUPLICATE_PHONE_COOLDOWN_MS = 3*60*1000; // 3 minutes
+const FLAG_HIDE_THRESHOLD = 3;
+const ADMIN_CODE = "joyblood@2026"; // demo-only client-side code — visible in source, not real security
+function countRecentByUser(list, userId, windowMs){
+  const cutoff = Date.now() - windowMs;
+  return list.filter(item => item.ownerUserId === userId && new Date(item.createdAt).getTime() >= cutoff).length;
+}
+function hasRecentDuplicatePhone(list, phone, cooldownMs){
+  const cutoff = Date.now() - cooldownMs;
+  return list.some(item => (item.phone === phone || item.contactPhone === phone) && new Date(item.createdAt).getTime() >= cutoff);
+}
+function isFlaggedHidden(item){
+  return (item.flaggedBy || []).length >= FLAG_HIDE_THRESHOLD;
+}
+function flagDonor(id){
+  requireAuth(()=>{
+    const d = donors.find(x=>x.id===id);
+    if(!d) return;
+    if(d.ownerUserId && d.ownerUserId === currentUser.id){ toast(t("flagOwnPost"), true); return; }
+    d.flaggedBy = d.flaggedBy || [];
+    if(d.flaggedBy.includes(currentUser.id)){ toast(t("flagAlready"), true); return; }
+    d.flaggedBy.push(currentUser.id);
+    saveDonors();
+    renderDonorGrid(); renderMap();
+    toast(t("flagSuccess"));
+  });
+}
+function flagRequest(id){
+  requireAuth(()=>{
+    const r = requests.find(x=>x.id===id);
+    if(!r) return;
+    if(r.ownerUserId && r.ownerUserId === currentUser.id){ toast(t("flagOwnPost"), true); return; }
+    r.flaggedBy = r.flaggedBy || [];
+    if(r.flaggedBy.includes(currentUser.id)){ toast(t("flagAlready"), true); return; }
+    r.flaggedBy.push(currentUser.id);
+    saveRequests();
+    renderRequests();
+    toast(t("flagSuccess"));
+  });
+}
+
+/* ============ ADMIN PANEL ============ */
+/* ============ SEPARATE ADMIN ACCESS FORM (hidden from normal signup) ============ */
+function renderAdminAccessForm(areaId, prefix, onSuccess){
+  const area = document.getElementById(areaId);
+  area.innerHTML = '<div class="admin-access-panel">'
+    + '<div class="admin-access-kicker">🔐 '+t("adminPortalKicker")+'</div>'
+    + '<div class="admin-access-note">'+t("adminAccessNote")+'</div>'
+    + '<div class="field"><label for="'+prefix+'AdminUser">'+t("fUsername")+'</label><input type="text" id="'+prefix+'AdminUser"></div>'
+    + '<div class="field"><label for="'+prefix+'AdminPass">'+t("fPassword")+'</label><input type="password" id="'+prefix+'AdminPass"></div>'
+    + '<div class="field"><label for="'+prefix+'AdminCode">'+t("adminCodeLabel2")+'</label><input type="password" id="'+prefix+'AdminCode"></div>'
+    + '<div class="error-text" id="'+prefix+'AdminErr"></div>'
+    + '<button class="btn btn-danger" style="width:100%;justify-content:center;" id="'+prefix+'AdminSubmit">🔐 '+t("adminAccessBtn")+'</button>'
+    + '<button class="btn-ghost" id="'+prefix+'AdminBack" type="button" style="margin-top:10px;color:#9fb0a6;">← '+t("backToLogin")+'</button>'
+    + '</div>';
+  document.getElementById(prefix+"AdminSubmit").addEventListener("click", async ()=>{
+    const username = document.getElementById(prefix+"AdminUser").value.trim();
+    const password = document.getElementById(prefix+"AdminPass").value;
+    const code = document.getElementById(prefix+"AdminCode").value.trim();
+    const errEl = document.getElementById(prefix+"AdminErr");
+    errEl.textContent = "";
+    if(code !== ADMIN_CODE){ errEl.textContent = t("adminCodeWrong"); return; }
+    if(username.length < 3){ errEl.textContent = t("authUsernameShort"); return; }
+    if(password.length < 4){ errEl.textContent = t("authPasswordShort"); return; }
+    const hash = await hashPassword(password);
+    let user = users.find(u=>u.username.toLowerCase() === username.toLowerCase());
+    if(user){
+      if(user.passHash !== hash){ errEl.textContent = t("authInvalidLogin"); return; }
+      user.isAdmin = true;
+    }else{
+      user = {id:uid(), username, passHash:hash, createdAt: nowIso(), isAdmin:true};
+      users.push(user);
+    }
+    saveUsers();
+    currentUser = {id:user.id, username:user.username, isAdmin:true};
+    saveSession();
+    toast(t("authRegisterSuccessAdmin"));
+    onSuccess();
+  });
+  document.getElementById(prefix+"AdminBack").addEventListener("click", ()=>{
+    document.getElementById(prefix==="auth" ? "tabLogin" : "gateTabLogin").click();
+  });
+}
+
+let adminActiveTab = "overview";
+let adminSearchQuery = "";
+
+function openAdminPanel(){
+  if(!currentUser || !currentUser.isAdmin) return;
+  document.getElementById("mainApp").style.display = "none";
+  document.getElementById("adminDashboard").classList.add("open");
+  renderAdminTab(adminActiveTab);
+}
+function closeAdminPanel(){
+  document.getElementById("adminDashboard").classList.remove("open");
+  showMainApp();
+}
+function wireAdminDashboard(){
+  document.getElementById("adminDashBack").addEventListener("click", closeAdminPanel);
+  document.getElementById("adminDashLogout").addEventListener("click", ()=>{
+    currentUser = null;
+    saveSession();
+    document.getElementById("adminDashboard").classList.remove("open");
+    toast(t("authLogoutDone"));
+    showAuthGate("login");
+  });
+  document.querySelectorAll("#adminDashNav [data-admin-tab]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll("#adminDashNav button").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      adminSearchQuery = "";
+      renderAdminTab(btn.getAttribute("data-admin-tab"));
+    });
+  });
+}
+function renderAdminTab(tabName){
+  adminActiveTab = tabName;
+  const c = document.getElementById("adminDashContent");
+  if(tabName === "overview") return renderAdminOverview(c);
+  if(tabName === "donors") return renderAdminDonorsTab(c);
+  if(tabName === "requests") return renderAdminRequestsTab(c);
+  if(tabName === "users") return renderAdminUsersTab(c);
+  if(tabName === "reports") return renderAdminReportsTab(c);
+}
+function renderAdminOverview(c){
+  const flaggedDonors = donors.filter(d => (d.flaggedBy||[]).length > 0);
+  const flaggedRequests = requests.filter(r => (r.flaggedBy||[]).length > 0);
+  const activeRequests = requests.filter(r => (Date.now() - new Date(r.createdAt).getTime()) <= 72*3600*1000);
+  const admins = users.filter(u=>u.isAdmin);
+  c.innerHTML = '<div class="admin-stat-grid">'
+    + '<div class="admin-stat-card"><b>'+donors.length+'</b><span>'+t("adminStatDonors")+'</span></div>'
+    + '<div class="admin-stat-card"><b>'+requests.length+'</b><span>'+t("adminStatRequests")+'</span></div>'
+    + '<div class="admin-stat-card"><b>'+activeRequests.length+'</b><span>'+t("urgentHeading")+'</span></div>'
+    + '<div class="admin-stat-card"><b>'+users.length+'</b><span>'+t("adminStatUsers")+'</span></div>'
+    + '<div class="admin-stat-card"><b>'+admins.length+'</b><span>'+t("adminRoleAdmin")+'</span></div>'
+    + '<div class="admin-stat-card"><b>'+(flaggedDonors.length+flaggedRequests.length)+'</b><span>'+t("adminStatFlagged")+'</span></div>'
+    + '</div>';
+}
+function adminSearchBar(placeholder){
+  return '<input type="text" class="admin-search" id="adminSearchInput" placeholder="'+placeholder+'" value="'+escapeHtml(adminSearchQuery)+'">';
+}
+function wireAdminSearch(onInput){
+  const el = document.getElementById("adminSearchInput");
+  if(!el) return;
+  el.addEventListener("input", (e)=>{ adminSearchQuery = e.target.value; onInput(); });
+  el.focus();
+  el.selectionStart = el.selectionEnd = el.value.length;
+}
+function renderAdminDonorsTab(c){
+  const q = adminSearchQuery.toLowerCase();
+  const list = donors.filter(d => !q || d.name.toLowerCase().includes(q) || d.phone.includes(q) || (DISTRICT_NAMES[d.district]&&(DISTRICT_NAMES[d.district].bn.includes(q)||DISTRICT_NAMES[d.district].en.toLowerCase().includes(q))));
+  c.innerHTML = '<div class="admin-section-head"><h3>'+t("adminTabDonors")+' ('+donors.length+')</h3>'+adminSearchBar(t("adminSearchPlaceholder"))+'</div>'
+    + (list.length===0 ? '<div class="empty-note">'+t("adminNoResults")+'</div>' : '<div class="admin-table-wrap"><table class="admin-table"><thead><tr>'
+      + '<th>'+t("colName")+'</th><th>'+t("colPhone")+'</th><th>'+t("colBloodGroup")+'</th><th>'+t("colDistrict")+'</th><th>'+t("colStatus")+'</th><th>'+t("colFlags")+'</th><th>'+t("colActions")+'</th>'
+      + '</tr></thead><tbody>'
+      + list.map(d=>{
+          const hidden = isFlaggedHidden(d);
+          const districtName = DISTRICT_NAMES[d.district] ? DISTRICT_NAMES[d.district][lang] : d.district;
+          return '<tr><td>'+escapeHtml(d.name)+(hidden?' <span class="admin-pill hidden-yes">'+t("adminHiddenTag")+'</span>':'')+'</td>'
+            + '<td>'+escapeHtml(d.phone)+'</td><td>'+d.bloodGroup+'</td><td>'+escapeHtml(districtName)+'</td>'
+            + '<td>'+(d.status||"now")+'</td><td>'+(d.flaggedBy||[]).length+'</td>'
+            + '<td><div class="admin-table-actions">'
+            + '<button data-admin-edit-donor="'+d.id+'">'+t("edit")+'</button>'
+            + (hidden ? '<button data-admin-unhide="donor:'+d.id+'">'+t("unhideBtn")+'</button>' : '')
+            + '<button class="danger" data-admin-del-donor="'+d.id+'">'+t("del")+'</button>'
+            + '</div></td></tr>';
+        }).join("")
+      + '</tbody></table></div>');
+  wireAdminSearch(()=>renderAdminDonorsTab(c));
+  c.querySelectorAll("[data-admin-edit-donor]").forEach(btn=>btn.addEventListener("click", ()=>openDonorForm(btn.getAttribute("data-admin-edit-donor"))));
+  c.querySelectorAll("[data-admin-unhide]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-unhide").split(":")[1];
+    const d = donors.find(x=>x.id===id); if(d){ d.flaggedBy = []; saveDonors(); renderMap(); }
+    toast(t("unhideDone")); renderAdminDonorsTab(c);
+  }));
+  c.querySelectorAll("[data-admin-del-donor]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-del-donor");
+    confirmModal(t("confirmPermDelete"), t("yesDelete"), ()=>{
+      donors = donors.filter(x=>x.id!==id); ownedDonorIds = ownedDonorIds.filter(i=>i!==id);
+      saveDonors(); saveOwned(); renderMap();
+      toast(t("permDeleteDone")); renderAdminDonorsTab(c);
+    });
+  }));
+}
+function renderAdminRequestsTab(c){
+  const q = adminSearchQuery.toLowerCase();
+  const list = requests.filter(r => !q || r.patientName.toLowerCase().includes(q) || r.hospital.toLowerCase().includes(q) || r.contactPhone.includes(q));
+  c.innerHTML = '<div class="admin-section-head"><h3>'+t("adminTabRequests")+' ('+requests.length+')</h3>'+adminSearchBar(t("adminSearchPlaceholder"))+'</div>'
+    + (list.length===0 ? '<div class="empty-note">'+t("adminNoResults")+'</div>' : '<div class="admin-table-wrap"><table class="admin-table"><thead><tr>'
+      + '<th>'+t("colPatient")+'</th><th>'+t("colHospital")+'</th><th>'+t("colBloodGroup")+'</th><th>'+t("colUrgency")+'</th><th>'+t("colFlags")+'</th><th>'+t("colActions")+'</th>'
+      + '</tr></thead><tbody>'
+      + list.map(r=>{
+          const hidden = isFlaggedHidden(r);
+          const expired = (Date.now() - new Date(r.createdAt).getTime()) > 72*3600*1000;
+          return '<tr><td>'+escapeHtml(r.patientName)+(hidden?' <span class="admin-pill hidden-yes">'+t("adminHiddenTag")+'</span>':'')+(expired?' <span class="badge badge-expired">'+t("expired")+'</span>':'')+'</td>'
+            + '<td>'+escapeHtml(r.hospital)+'</td><td>'+r.bloodGroup+'</td><td>'+r.urgency+'</td><td>'+(r.flaggedBy||[]).length+'</td>'
+            + '<td><div class="admin-table-actions">'
+            + '<button data-admin-edit-req="'+r.id+'">'+t("edit")+'</button>'
+            + (hidden ? '<button data-admin-unhide="request:'+r.id+'">'+t("unhideBtn")+'</button>' : '')
+            + '<button class="danger" data-admin-del-req="'+r.id+'">'+t("del")+'</button>'
+            + '</div></td></tr>';
+        }).join("")
+      + '</tbody></table></div>');
+  wireAdminSearch(()=>renderAdminRequestsTab(c));
+  c.querySelectorAll("[data-admin-edit-req]").forEach(btn=>btn.addEventListener("click", ()=>openRequestForm(btn.getAttribute("data-admin-edit-req"))));
+  c.querySelectorAll("[data-admin-unhide]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-unhide").split(":")[1];
+    const r = requests.find(x=>x.id===id); if(r){ r.flaggedBy = []; saveRequests(); }
+    toast(t("unhideDone")); renderAdminRequestsTab(c);
+  }));
+  c.querySelectorAll("[data-admin-del-req]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-del-req");
+    confirmModal(t("confirmPermDelete"), t("yesDelete"), ()=>{
+      requests = requests.filter(x=>x.id!==id); ownedRequestIds = ownedRequestIds.filter(i=>i!==id);
+      saveRequests(); saveOwned();
+      toast(t("permDeleteDone")); renderAdminRequestsTab(c);
+    });
+  }));
+}
+function renderAdminUsersTab(c){
+  const q = adminSearchQuery.toLowerCase();
+  const list = users.filter(u => !q || u.username.toLowerCase().includes(q));
+  c.innerHTML = '<div class="admin-section-head"><h3>'+t("adminTabUsers")+' ('+users.length+')</h3>'+adminSearchBar(t("adminSearchPlaceholder"))+'</div>'
+    + (list.length===0 ? '<div class="empty-note">'+t("adminNoResults")+'</div>' : '<div class="admin-table-wrap"><table class="admin-table"><thead><tr>'
+      + '<th>'+t("colUsername")+'</th><th>'+t("colRole")+'</th><th>'+t("colJoined")+'</th><th>'+t("colActions")+'</th>'
+      + '</tr></thead><tbody>'
+      + list.map(u=>{
+          const isSelf = currentUser && u.id === currentUser.id;
+          return '<tr><td>'+escapeHtml(u.username)+(isSelf?' <span class="admin-pill admin-no">('+t("welcomeUser")+')</span>':'')+'</td>'
+            + '<td><span class="admin-pill '+(u.isAdmin?"admin-yes":"admin-no")+'">'+(u.isAdmin?t("adminRoleAdmin"):t("adminRoleUser"))+'</span></td>'
+            + '<td>'+fmtDate(u.createdAt, lang)+'</td>'
+            + '<td><div class="admin-table-actions">'
+            + (u.isAdmin
+              ? '<button data-admin-demote="'+u.id+'">'+t("adminDemote")+'</button>'
+              : '<button data-admin-promote="'+u.id+'">'+t("adminPromote")+'</button>')
+            + '<button class="danger" data-admin-del-user="'+u.id+'">'+t("adminDeleteUser")+'</button>'
+            + '</div></td></tr>';
+        }).join("")
+      + '</tbody></table></div>');
+  wireAdminSearch(()=>renderAdminUsersTab(c));
+  c.querySelectorAll("[data-admin-promote]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-promote");
+    confirmModal(t("confirmPromote"), t("yesConfirm"), ()=>{
+      const u = users.find(x=>x.id===id); if(u){ u.isAdmin = true; saveUsers(); }
+      toast(t("actionDone")); renderAdminUsersTab(c);
+    });
+  }));
+  c.querySelectorAll("[data-admin-demote]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-demote");
+    if(currentUser && id === currentUser.id){ toast(t("cannotModifySelf"), true); return; }
+    confirmModal(t("confirmDemote"), t("yesConfirm"), ()=>{
+      const u = users.find(x=>x.id===id); if(u){ u.isAdmin = false; saveUsers(); }
+      toast(t("actionDone")); renderAdminUsersTab(c);
+    });
+  }));
+  c.querySelectorAll("[data-admin-del-user]").forEach(btn=>btn.addEventListener("click", ()=>{
+    const id = btn.getAttribute("data-admin-del-user");
+    if(currentUser && id === currentUser.id){ toast(t("cannotModifySelf"), true); return; }
+    confirmModal(t("confirmDeleteUser"), t("yesDelete"), ()=>{
+      users = users.filter(x=>x.id!==id); saveUsers();
+      toast(t("permDeleteDone")); renderAdminUsersTab(c);
+    });
+  }));
+}
+function renderAdminReportsTab(c){
+  const flaggedDonors = donors.filter(d => (d.flaggedBy||[]).length > 0);
+  const flaggedRequests = requests.filter(r => (r.flaggedBy||[]).length > 0);
+  function rowHtml(item, type, label){
+    const hidden = isFlaggedHidden(item);
+    return '<div class="admin-row">'
+      + '<div><b>'+escapeHtml(label)+'</b> '+(hidden?'<span class="badge badge-expired">'+t("adminHiddenTag")+'</span>':'')
+      + '<div class="donor-meta">'+t("adminFlagCount")+': '+(item.flaggedBy||[]).length+'</div></div>'
+      + '<div class="admin-row-actions">'
+      + '<button class="btn btn-outline" data-unhide="'+type+':'+item.id+'">'+t("unhideBtn")+'</button>'
+      + '<button class="btn btn-danger" data-perm-delete="'+type+':'+item.id+'">'+t("permDeleteBtn")+'</button>'
+      + '</div></div>';
+  }
+  c.innerHTML = '<div class="admin-section-head"><h3>'+t("adminFlaggedSectionTitle")+'</h3></div>'
+    + ((flaggedDonors.length===0 && flaggedRequests.length===0)
+      ? '<div class="empty-note">'+t("adminNoFlagged")+'</div>'
+      : flaggedDonors.map(d=>rowHtml(d,"donor",d.name)).join("") + flaggedRequests.map(r=>rowHtml(r,"request",r.patientName)).join(""));
+  c.querySelectorAll("[data-unhide]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const [type, id] = btn.getAttribute("data-unhide").split(":");
+      if(type === "donor"){ const d = donors.find(x=>x.id===id); if(d){ d.flaggedBy = []; saveDonors(); renderMap(); } }
+      else{ const r = requests.find(x=>x.id===id); if(r){ r.flaggedBy = []; saveRequests(); } }
+      toast(t("unhideDone")); renderAdminReportsTab(c);
+    });
+  });
+  c.querySelectorAll("[data-perm-delete]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const [type, id] = btn.getAttribute("data-perm-delete").split(":");
+      confirmModal(t("confirmPermDelete"), t("yesDelete"), ()=>{
+        if(type === "donor"){ donors = donors.filter(x=>x.id!==id); saveDonors(); renderMap(); }
+        else{ requests = requests.filter(x=>x.id!==id); saveRequests(); }
+        toast(t("permDeleteDone")); renderAdminReportsTab(c);
+      });
+    });
+  });
+}
+
+function addMonths(date, n){
+  const d = new Date(date);
+  d.setMonth(d.getMonth()+n);
+  return d;
+}
+function eligibility(donor){
+  if(!donor.lastDonation) return {eligible:true, nextDate:null};
+  const next = addMonths(donor.lastDonation, 4);
+  return {eligible: new Date() >= next, nextDate: next};
+}
+function fmtDate(d, locale){
+  const dt = (d instanceof Date) ? d : new Date(d);
+  return dt.toLocaleDateString(locale === "bn" ? "bn-BD" : "en-GB", {year:"numeric", month:"short", day:"numeric"});
+}
+function escapeHtml(s){
+  return (s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function toast(msg, isError){
+  const root = document.getElementById("toastRoot");
+  const el = document.createElement("div");
+  el.className = "sr-toast";
+  if(isError) el.style.background = "#c62f22";
+  el.textContent = msg;
+  root.innerHTML = "";
+  root.appendChild(el);
+  setTimeout(()=>{ if(el.parentNode) el.parentNode.removeChild(el); }, 3200);
+}
+function copyPhoneToClipboard(phone, btnEl){
+  const done = ()=>{
+    toast(t("copiedToast"));
+    if(btnEl){
+      const original = btnEl.textContent;
+      btnEl.textContent = "✓";
+      btnEl.classList.add("copied");
+      setTimeout(()=>{ btnEl.textContent = original; btnEl.classList.remove("copied"); }, 1500);
+    }
+  };
+  const fallbackCopy = ()=>{
+    try{
+      const ta = document.createElement("textarea");
+      ta.value = phone;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      done();
+    }catch(e){
+      toast(phone, false);
+    }
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(phone).then(done).catch(fallbackCopy);
+  }else{
+    fallbackCopy();
+  }
+}
+function mapsLink(query){ return "https://maps.google.com/maps?q="+encodeURIComponent(query); }
+
+/* ============ RENDER: STATIC UI TEXT ============ */
+function applyI18nStrings(){
+  document.documentElement.lang = lang === "bn" ? "bn" : "en";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    el.textContent = t(el.getAttribute("data-i18n"));
+  });
+  document.getElementById("langToggle").textContent = lang === "bn" ? "EN" : "বাং";
+  document.getElementById("themeToggle").textContent = theme === "dark" ? "☀️" : "🌙";
+  document.getElementById("themeToggle").setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
+}
+
+function renderBloodGroupFilter(){
+  const row = document.getElementById("bgFilterRow");
+  row.innerHTML = "";
+  BLOOD_GROUPS.forEach(bg=>{
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = bg;
+    b.setAttribute("aria-pressed", filters.bloodGroup === bg ? "true" : "false");
+    b.addEventListener("click", ()=>{
+      filters.bloodGroup = filters.bloodGroup === bg ? null : bg;
+      renderBloodGroupFilter();
+      renderDonorGrid();
+    });
+    row.appendChild(b);
+  });
+}
+function renderDivisionDistrictSelects(){
+  const divSel = document.getElementById("divisionSelect");
+  const distSel = document.getElementById("districtSelect");
+  const curDiv = filters.division;
+  divSel.innerHTML = "";
+  const optAll = document.createElement("option");
+  optAll.value = ""; optAll.textContent = t("allDivisions");
+  divSel.appendChild(optAll);
+  Object.keys(DIVISIONS).forEach(k=>{
+    const o = document.createElement("option");
+    o.value = k; o.textContent = DIVISIONS[k][lang];
+    if(k === curDiv) o.selected = true;
+    divSel.appendChild(o);
+  });
+  distSel.innerHTML = "";
+  const optAllD = document.createElement("option");
+  optAllD.value = ""; optAllD.textContent = t("allDistricts");
+  distSel.appendChild(optAllD);
+  const districtPool = curDiv ? DIVISIONS[curDiv].districts : Object.keys(DISTRICT_NAMES);
+  districtPool.forEach(dk=>{
+    const o = document.createElement("option");
+    o.value = dk; o.textContent = DISTRICT_NAMES[dk][lang];
+    if(dk === filters.district) o.selected = true;
+    distSel.appendChild(o);
+  });
+}
+
+function renderManualLocationSelect(){
+  const sel = document.getElementById("manualLocationSelect");
+  const optBlank = document.createElement("option");
+  sel.innerHTML = "";
+  optBlank.value = ""; optBlank.textContent = t("locManualPlaceholder");
+  sel.appendChild(optBlank);
+  Object.keys(DISTRICT_NAMES).sort((a,b)=>DISTRICT_NAMES[a][lang].localeCompare(DISTRICT_NAMES[b][lang], lang==="bn"?"bn":"en")).forEach(dk=>{
+    const o = document.createElement("option");
+    o.value = dk; o.textContent = DISTRICT_NAMES[dk][lang];
+    if(dk === manualLocationDistrict) o.selected = true;
+    sel.appendChild(o);
+  });
+}
+
+/* ============ RENDER: REQUESTS ============ */
+function renderRequests(){
+  const list = document.getElementById("requestList");
+  const now = Date.now();
+  const withStatus = requests.filter(r=>!isFlaggedHidden(r)).map(r=>{
+    const elapsed = now - new Date(r.createdAt).getTime();
+    const expired = elapsed > 72*3600*1000;
+    const msRemaining = (72*3600*1000) - elapsed;
+    const matches = expired ? [] : computeMatches(r);
+    const priority = expired ? 0 : computePriorityScore(r, matches.length);
+    return Object.assign({}, r, {expired, msRemaining, matches, priority});
+  });
+  withStatus.sort((a,b)=>{
+    if(a.expired !== b.expired) return a.expired ? 1 : -1;
+    if(a.priority !== b.priority) return b.priority - a.priority;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+  if(withStatus.length === 0){
+    list.innerHTML = '<div class="empty-note">'+escapeHtml(t("noRequests"))+'</div>';
+    return;
+  }
+  list.innerHTML = withStatus.map(r=>{
+    const isOwner = ownedRequestIds.indexOf(r.id) !== -1 || (currentUser && r.ownerUserId === currentUser.id);
+    const districtName = DISTRICT_NAMES[r.district] ? DISTRICT_NAMES[r.district][lang] : r.district;
+    const cardClass = r.expired ? "req-card expired" : (r.urgency === "Moderate" ? "req-card moderate" : "req-card");
+    const badge = r.expired
+      ? '<span class="badge badge-expired">'+t("expired")+'</span>'
+      : (r.urgency === "Critical"
+        ? '<span class="badge badge-critical"><span class="pulse-dot"></span>'+t("critical")+'</span>'
+        : '<span class="badge badge-moderate">'+t("moderate")+'</span>');
+    const priorityBadge = r.expired ? "" : '<span class="priority-badge">'+t("priorityLabel")+": "+r.priority+'</span>';
+    const countdown = (!r.expired && r.msRemaining!==null) ? '<div class="countdown">⏳ '+formatCountdown(r.msRemaining)+' '+t("remaining")+'</div>' : '';
+    const mapUrl = r.hospitalMapLink ? r.hospitalMapLink : mapsLink(r.hospital+" "+districtName);
+    const matchHtml = r.expired ? "" : (
+      '<div class="match-panel"><div class="match-panel-title">🎯 '+t("bestMatch")+'</div>'
+      + (r.matches.length === 0
+        ? '<div class="donor-meta">'+t("bestMatchNone")+'</div>'
+        : r.matches.map(m=>{
+            const distTxt = (m._dist!==null && m._dist!==undefined) ? (' · ~'+Math.round(m._dist)+' '+t("kmAway")) : '';
+            return '<span class="match-chip"><span class="status-dot status-'+(m.status==="now"?"now":(m.status==="later"?"later":"off"))+'"></span>'+escapeHtml(m.name)+distTxt+'<span class="phone-action-mini"><a href="tel:'+m.phone+'">📞 '+t("call")+'</a><button data-copy-phone="'+escapeHtml(m.phone)+'">📋</button></span></span>';
+          }).join(""))
+      + '</div>'
+    );
+    return '<div class="'+cardClass+'">'
+      + '<div class="req-top"><div class="req-title">'+escapeHtml(r.patientName)+' · <span class="bg-tag">'+r.bloodGroup+'</span></div><div style="display:flex;gap:6px;flex-wrap:wrap;">'+badge+priorityBadge+'</div></div>'
+      + '<div class="req-meta">'+escapeHtml(r.hospital)+' · '+escapeHtml(districtName)+' · '+r.unitsNeeded+' '+t("units")+'</div>'
+      + '<div class="req-meta">📞 '+escapeHtml(r.contactPhone)+'</div>'
+      + (r.note ? '<div class="req-meta">'+escapeHtml(r.note)+'</div>' : '')
+      + '<div class="req-meta">'+fmtDate(r.createdAt, lang)+'</div>'
+      + countdown
+      + '<div class="req-actions">'
+      + '<span class="phone-action"><a class="phone-action-call" href="tel:'+r.contactPhone+'">📞 '+t("call")+'</a><button class="phone-action-copy" data-copy-phone="'+escapeHtml(r.contactPhone)+'" title="'+t("copyNumber")+'">📋</button></span>'
+      + '<a class="btn btn-outline" href="'+mapUrl+'" target="_blank" rel="noopener">'+t("viewMap")+'</a>'
+      + (isOwner ? '<button class="btn btn-outline" data-edit-req="'+r.id+'">'+t("edit")+'</button>' : '')
+      + '<button class="btn btn-danger" data-resolve-req="'+r.id+'">'+t("resolve")+'</button>'
+      + (!isOwner ? '<button class="status-cycle-btn" data-flag-req="'+r.id+'">🚩 '+t("reportBtn")+'</button>' : '')
+      + '</div>'
+      + matchHtml
+      + '</div>';
+  }).join("");
+
+  list.querySelectorAll("[data-resolve-req]").forEach(btn=>{
+    btn.addEventListener("click", ()=>confirmModal(t("confirmResolveReq"), t("yesResolve"), ()=>resolveRequest(btn.getAttribute("data-resolve-req"))));
+  });
+  list.querySelectorAll("[data-edit-req]").forEach(btn=>{
+    btn.addEventListener("click", ()=>openRequestForm(btn.getAttribute("data-edit-req")));
+  });
+  list.querySelectorAll("[data-flag-req]").forEach(btn=>{
+    btn.addEventListener("click", ()=>flagRequest(btn.getAttribute("data-flag-req")));
+  });
+  list.querySelectorAll("[data-copy-phone]").forEach(btn=>{
+    btn.addEventListener("click", ()=>copyPhoneToClipboard(btn.getAttribute("data-copy-phone"), btn));
+  });
+}
+function resolveRequest(id){
+  requests = requests.filter(r=>r.id !== id);
+  ownedRequestIds = ownedRequestIds.filter(i=>i!==id);
+  saveRequests(); saveOwned();
+  renderRequests();
+  toast(lang==="bn" ? "অনুরোধটি সরিয়ে দেওয়া হয়েছে।" : "The request has been removed.");
+}
+
+/* ============ RENDER: DONOR GRID ============ */
+function donorDistanceKm(donor){
+  if(!userLoc) return null;
+  return districtDistanceKm(userLoc.lat, userLoc.lng, donor.district);
+}
+function filteredDonors(){
+  let list = donors.filter(d=>{
+    if(isFlaggedHidden(d)) return false;
+    if(filters.bloodGroup && d.bloodGroup !== filters.bloodGroup) return false;
+    if(filters.division && DISTRICT_TO_DIVISION[d.district] !== filters.division) return false;
+    if(filters.district && d.district !== filters.district) return false;
+    if(filters.eligibleOnly && !eligibility(d).eligible) return false;
+    if(filters.availableNowOnly && (d.status||"now") !== "now") return false;
+    if(filters.radiusKm && userLoc){
+      const dist = donorDistanceKm(d);
+      if(dist === null || dist > filters.radiusKm) return false;
+    }
+    return true;
+  });
+  if(userLoc){
+    list = list.slice().sort((a,b)=> (donorDistanceKm(a)||1e9) - (donorDistanceKm(b)||1e9));
+  }else{
+    list = list.slice().sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt));
+  }
+  return list;
+}
+function renderDonorGrid(highlightId){
+  const grid = document.getElementById("donorGrid");
+  const list = filteredDonors();
+  if(list.length === 0){
+    grid.innerHTML = '<div class="empty-note" style="grid-column:1/-1;">'+escapeHtml(t("noDonors"))+'</div>';
+    return;
+  }
+  grid.innerHTML = list.map(d=>{
+    const isOwner = ownedDonorIds.indexOf(d.id) !== -1 || (currentUser && d.ownerUserId === currentUser.id);
+    const elig = eligibility(d);
+    const districtName = DISTRICT_NAMES[d.district] ? DISTRICT_NAMES[d.district][lang] : d.district;
+    const eligHtml = elig.eligible
+      ? '<div class="elig-yes">● '+t("eligibleNow")+'</div>'
+      : '<div class="elig-no">● '+t("cooldownUntil")+' '+fmtDate(elig.nextDate, lang)+'</div>';
+    const status = d.status || "now";
+    const statusClass = status==="now" ? "status-now" : (status==="later" ? "status-later" : "status-off");
+    const statusLabel = status==="now" ? t("statusNow") : (status==="later" ? t("statusLater") : t("statusOff"));
+    const dist = donorDistanceKm(d);
+    const distChip = (dist!==null && dist!==undefined) ? '<span class="distance-chip">~'+Math.round(dist)+' '+t("kmAway")+'</span>' : '';
+    return '<div class="donor-card'+(d.id===highlightId?" highlight":"")+'" id="donor-'+d.id+'">'
+      + '<div class="donor-top"><div class="donor-name">'+escapeHtml(d.name)+'</div><span class="bg-tag">'+d.bloodGroup+'</span></div>'
+      + '<div class="donor-meta">'+escapeHtml(districtName)+(d.area?(" · "+escapeHtml(d.area)):"")+(distChip?(' · '+distChip):'')+'</div>'
+      + eligHtml
+      + '<div class="status-line"><span class="status-dot '+statusClass+'"></span>'+statusLabel+'</div>'
+      + '<div class="donor-meta">📞 '+escapeHtml(d.phone)+'</div>'
+      + '<div class="donor-meta">'+t("registeredOn")+": "+fmtDate(d.createdAt, lang)+'</div>'
+      + '<div class="donor-actions">'
+      + '<span class="phone-action"><a class="phone-action-call" href="tel:'+d.phone+'">📞 '+t("call")+'</a><button class="phone-action-copy" data-copy-phone="'+escapeHtml(d.phone)+'" title="'+t("copyNumber")+'">📋</button></span>'
+      + (isOwner ? '<button class="btn-outline" style="border-radius:2px;" data-edit-donor="'+d.id+'">'+t("edit")+'</button>' : '')
+      + (isOwner ? '<button class="btn-outline" style="border-radius:2px;color:var(--red-600);border-color:var(--red-600);" data-del-donor="'+d.id+'">'+t("del")+'</button>' : '')
+      + (isOwner ? '<button class="status-cycle-btn" data-cycle-status="'+d.id+'">↻ '+t("changeStatus")+'</button>' : '')
+      + (!isOwner ? '<button class="status-cycle-btn" data-flag-donor="'+d.id+'" title="'+t("reportBtn")+'">🚩 '+t("reportBtn")+'</button>' : '')
+      + '</div></div>';
+  }).join("");
+
+  grid.querySelectorAll("[data-edit-donor]").forEach(btn=>{
+    btn.addEventListener("click", ()=>openDonorForm(btn.getAttribute("data-edit-donor")));
+  });
+  grid.querySelectorAll("[data-del-donor]").forEach(btn=>{
+    btn.addEventListener("click", ()=>confirmModal(t("confirmDeleteDonor"), t("yesDelete"), ()=>deleteDonor(btn.getAttribute("data-del-donor"))));
+  });
+  grid.querySelectorAll("[data-cycle-status]").forEach(btn=>{
+    btn.addEventListener("click", ()=>cycleDonorStatus(btn.getAttribute("data-cycle-status")));
+  });
+  grid.querySelectorAll("[data-flag-donor]").forEach(btn=>{
+    btn.addEventListener("click", ()=>flagDonor(btn.getAttribute("data-flag-donor")));
+  });
+  grid.querySelectorAll("[data-copy-phone]").forEach(btn=>{
+    btn.addEventListener("click", ()=>copyPhoneToClipboard(btn.getAttribute("data-copy-phone"), btn));
+  });
+  if(highlightId){
+    const el = document.getElementById("donor-"+highlightId);
+    if(el) el.scrollIntoView({behavior:"smooth", block:"center"});
+  }
+}
+function cycleDonorStatus(id){
+  const donor = donors.find(d=>d.id===id);
+  if(!donor) return;
+  const order = ["now","later","off"];
+  const cur = order.indexOf(donor.status || "now");
+  donor.status = order[(cur+1)%order.length];
+  saveDonors();
+  renderDonorGrid();
+}
+function deleteDonor(id){
+  donors = donors.filter(d=>d.id !== id);
+  ownedDonorIds = ownedDonorIds.filter(i=>i!==id);
+  saveDonors(); saveOwned();
+  renderDonorGrid(); renderMap();
+  toast(lang==="bn" ? "দাতার তথ্য মুছে ফেলা হয়েছে।" : "Donor entry deleted.");
+}
+
+/* ============ RENDER: MAP ============ */
+function activeRequestCountsByDivision(){
+  const counts = {};
+  Object.keys(DIVISIONS).forEach(k=>counts[k]=0);
+  const now = Date.now();
+  requests.forEach(r=>{
+    if(isFlaggedHidden(r)) return;
+    const expired = (now - new Date(r.createdAt).getTime()) > 72*3600*1000;
+    if(expired) return;
+    const div = DISTRICT_TO_DIVISION[r.district];
+    if(div) counts[div] = (counts[div]||0)+1;
+  });
+  return counts;
+}
+function demandColor(count){
+  if(count >= 3) return "#c62f22";
+  if(count >= 1) return "#c99a1f";
+  return "#8fae95";
+}
+function renderMap(){
+  const svg = document.getElementById("divisionMap");
+  const donorCounts = {};
+  Object.keys(DIVISIONS).forEach(k=>donorCounts[k]=0);
+  donors.filter(d=>!isFlaggedHidden(d)).forEach(d=>{
+    const div = DISTRICT_TO_DIVISION[d.district];
+    if(div) donorCounts[div] = (donorCounts[div]||0)+1;
+  });
+  const demandCounts = activeRequestCountsByDivision();
+  svg.innerHTML = Object.keys(DIVISIONS).map(k=>{
+    const div = DIVISIONS[k];
+    const pressed = filters.division === k;
+    const count = mapMode === "demand" ? demandCounts[k] : donorCounts[k];
+    const fillOverride = mapMode === "demand" ? ('style="fill:'+demandColor(demandCounts[k])+';stroke:'+demandColor(demandCounts[k])+';"') : "";
+    return '<g class="div-node" tabindex="0" role="button" aria-pressed="'+pressed+'" data-div="'+k+'" transform="translate('+(div.x-38)+','+(div.y-20)+')">'
+      + '<rect width="76" height="40" rx="3" '+(mapMode==="demand" && !pressed ? fillOverride : "")+'></rect>'
+      + '<text x="38" y="17" text-anchor="middle" '+(mapMode==="demand" && !pressed ? 'style="fill:#fff;"' : '')+'>'+escapeHtml(div[lang])+'</text>'
+      + '<text class="count" x="38" y="32" text-anchor="middle" '+(mapMode==="demand" && !pressed ? 'style="fill:#fff;"' : '')+'>'+count+'</text>'
+      + '</g>';
+  }).join("");
+  svg.querySelectorAll(".div-node").forEach(node=>{
+    const activate = ()=>{
+      const k = node.getAttribute("data-div");
+      filters.division = filters.division === k ? null : k;
+      filters.district = null;
+      renderMap();
+      renderDivisionDistrictSelects();
+      renderDonorGrid();
+    };
+    node.addEventListener("click", activate);
+    node.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); activate(); }
+    });
+  });
+  renderMapLegend();
+}
+function renderMapLegend(){
+  const legend = document.getElementById("mapLegend");
+  if(mapMode === "demand"){
+    legend.innerHTML =
+      '<span><span class="sw" style="background:#c62f22;"></span>'+t("legendHigh")+' (3+)</span>'
+      + '<span><span class="sw" style="background:#c99a1f;"></span>'+t("legendMed")+' (1-2)</span>'
+      + '<span><span class="sw" style="background:#8fae95;"></span>'+t("legendLow")+'</span>';
+  }else{
+    legend.innerHTML = '';
+  }
+}
+
+/* ============ SMART MATCHING & PRIORITY ============ */
+function computeMatches(request){
+  return donors
+    .filter(d=> !isFlaggedHidden(d) && d.bloodGroup === request.bloodGroup && eligibility(d).eligible)
+    .map(d=>{
+      const dist = districtDistanceKm(
+        (DISTRICT_COORDS[request.district]||[null,null])[0],
+        (DISTRICT_COORDS[request.district]||[null,null])[1],
+        d.district
+      );
+      return Object.assign({}, d, {_dist: dist});
+    })
+    .sort((a,b)=>{
+      const statusRank = s => s==="now" ? 0 : (s==="later" ? 1 : 2);
+      const sr = statusRank(a.status||"now") - statusRank(b.status||"now");
+      if(sr !== 0) return sr;
+      return (a._dist||1e9) - (b._dist||1e9);
+    })
+    .slice(0, 3);
+}
+function computePriorityScore(request, matchCount){
+  const now = Date.now();
+  const created = new Date(request.createdAt).getTime();
+  const elapsedFrac = Math.min(1, Math.max(0, (now-created) / (72*3600*1000)));
+  const urgencyPart = request.urgency === "Critical" ? 55 : 30;
+  const timePart = Math.round(elapsedFrac * 25);
+  const scarcityPart = matchCount === 0 ? 20 : (matchCount < 2 ? 10 : 0);
+  return Math.min(100, urgencyPart + timePart + scarcityPart);
+}
+function formatCountdown(msRemaining){
+  if(msRemaining <= 0) return null;
+  const totalSec = Math.floor(msRemaining/1000);
+  const h = Math.floor(totalSec/3600);
+  const m = Math.floor((totalSec%3600)/60);
+  const s = totalSec%60;
+  return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+/* ============ MODAL: CONFIRM ============ */
+function confirmModal(message, confirmLabel, onConfirm){
+  const root = document.getElementById("modalRoot");
+  root.innerHTML = '<div class="modal-backdrop"><div class="modal-box" role="dialog" aria-modal="true">'
+    + '<p>'+escapeHtml(message)+'</p>'
+    + '<div class="modal-actions"><button class="btn btn-outline" id="modalCancel">'+t("cancel")+'</button>'
+    + '<button class="btn btn-danger" id="modalConfirm">'+escapeHtml(confirmLabel)+'</button></div></div></div>';
+  document.getElementById("modalCancel").addEventListener("click", ()=>root.innerHTML="");
+  document.getElementById("modalConfirm").addEventListener("click", ()=>{ root.innerHTML=""; onConfirm(); });
+}
+
+/* ============ AUTH (lightweight, browser-based — not server-verified) ============ */
+async function hashPassword(pw){
+  try{
+    const enc = new TextEncoder().encode(pw);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  }catch(e){
+    // fallback: not cryptographically strong, but keeps the app functional
+    let h = 0;
+    for(let i=0;i<pw.length;i++){ h = ((h<<5)-h + pw.charCodeAt(i))|0; }
+    return "fb"+String(h);
+  }
+}
+function renderAuthArea(){
+  const el = document.getElementById("authArea");
+  if(currentUser){
+    const badge = currentUser.isAdmin ? ' <span style="color:var(--red-600);">👑</span>' : '';
+    el.innerHTML = '<span class="auth-menu">'
+      + '<button class="auth-chip" id="authMenuBtn">🙂 '+escapeHtml(currentUser.username)+badge+' ▾</button>'
+      + '<span id="authDropdownRoot"></span>'
+      + '</span>';
+    document.getElementById("authMenuBtn").addEventListener("click", ()=>{
+      const dd = document.getElementById("authDropdownRoot");
+      if(dd.innerHTML){ dd.innerHTML = ""; return; }
+      dd.innerHTML = '<div class="auth-dropdown">'
+        + (currentUser.isAdmin ? '<button id="adminPanelBtn">🛠️ '+t("adminPanelBtn")+'</button>' : '')
+        + '<button id="logoutBtn">'+t("logoutBtn")+'</button></div>';
+      if(currentUser.isAdmin){
+        document.getElementById("adminPanelBtn").addEventListener("click", ()=>{
+          dd.innerHTML = "";
+          openAdminPanel();
+        });
+      }
+      document.getElementById("logoutBtn").addEventListener("click", ()=>{
+        currentUser = null;
+        saveSession();
+        toast(t("authLogoutDone"));
+        showAuthGate("login");
+      });
+    });
+  }else{
+    el.innerHTML = '<button class="auth-chip" id="loginBtn">👤 '+t("loginBtn")+'</button>';
+    document.getElementById("loginBtn").addEventListener("click", ()=>openAuthModal());
+  }
+}
+function openAuthModal(afterSuccessCallback, initialTab){
+  const root = document.getElementById("modalRoot");
+  const tab = initialTab || "login";
+  root.innerHTML = '<div class="modal-backdrop"><div class="modal-box" style="max-width:380px;" role="dialog" aria-modal="true">'
+    + '<div class="auth-tabs">'
+    + '<button class="auth-tab'+(tab==="login"?" active":"")+'" id="tabLogin" type="button">'+t("authLoginTab")+'</button>'
+    + '<button class="auth-tab'+(tab==="register"?" active":"")+'" id="tabRegister" type="button">'+t("authRegisterTab")+'</button>'
+    + '</div>'
+    + '<div id="authFormArea"></div>'
+    + '<div class="auth-note">'+t("authSecurityNote")+'</div>'
+    + '<div class="admin-link-row"><button class="btn-ghost" id="authAdminLinkBtn" type="button">🔐 '+t("adminAccessLink")+'</button></div>'
+    + '</div></div>';
+  function showLoginForm(){
+    document.getElementById("tabLogin").classList.add("active");
+    document.getElementById("tabRegister").classList.remove("active");
+    const area = document.getElementById("authFormArea");
+    area.innerHTML = '<div class="field"><label for="authUsername">'+t("fUsername")+'</label><input type="text" id="authUsername"></div>'
+      + '<div class="field"><label for="authPassword">'+t("fPassword")+'</label><input type="password" id="authPassword"></div>'
+      + '<div class="error-text" id="authErr"></div>'
+      + '<button class="btn btn-primary" style="width:100%;justify-content:center;" id="authSubmit">'+t("authLoginBtn")+'</button>';
+    document.getElementById("authSubmit").addEventListener("click", async ()=>{
+      const username = document.getElementById("authUsername").value.trim();
+      const password = document.getElementById("authPassword").value;
+      const errEl = document.getElementById("authErr");
+      errEl.textContent = "";
+      const hash = await hashPassword(password);
+      const user = users.find(u=>u.username.toLowerCase() === username.toLowerCase() && u.passHash === hash);
+      if(!user){ errEl.textContent = t("authInvalidLogin"); return; }
+      currentUser = {id:user.id, username:user.username, isAdmin: !!user.isAdmin};
+      saveSession();
+      renderAuthArea();
+      root.innerHTML = "";
+      toast(t("authLoginSuccess"));
+      if(afterSuccessCallback) afterSuccessCallback();
+    });
+  }
+  function showRegisterForm(){
+    document.getElementById("tabRegister").classList.add("active");
+    document.getElementById("tabLogin").classList.remove("active");
+    const area = document.getElementById("authFormArea");
+    area.innerHTML = '<div class="field"><label for="authUsername">'+t("fUsername")+'</label><input type="text" id="authUsername"></div>'
+      + '<div class="field"><label for="authPassword">'+t("fPassword")+'</label><input type="password" id="authPassword"></div>'
+      + '<div class="field"><label for="authPassword2">'+t("fPasswordConfirm")+'</label><input type="password" id="authPassword2"></div>'
+      + '<div class="error-text" id="authErr"></div>'
+      + '<button class="btn btn-primary" style="width:100%;justify-content:center;" id="authSubmit">'+t("authRegisterBtn")+'</button>';
+    document.getElementById("authSubmit").addEventListener("click", async ()=>{
+      const username = document.getElementById("authUsername").value.trim();
+      const password = document.getElementById("authPassword").value;
+      const password2 = document.getElementById("authPassword2").value;
+      const errEl = document.getElementById("authErr");
+      errEl.textContent = "";
+      if(username.length < 3){ errEl.textContent = t("authUsernameShort"); return; }
+      if(users.some(u=>u.username.toLowerCase() === username.toLowerCase())){ errEl.textContent = t("authUsernameTaken"); return; }
+      if(password.length < 4){ errEl.textContent = t("authPasswordShort"); return; }
+      if(password !== password2){ errEl.textContent = t("authPasswordMismatch"); return; }
+      const hash = await hashPassword(password);
+      const id = uid();
+      users.push({id, username, passHash:hash, createdAt: nowIso(), isAdmin:false});
+      saveUsers();
+      currentUser = {id, username, isAdmin:false};
+      saveSession();
+      renderAuthArea();
+      root.innerHTML = "";
+      toast(t("authRegisterSuccess"));
+      if(afterSuccessCallback) afterSuccessCallback();
+    });
+  }
+  document.getElementById("tabLogin").addEventListener("click", showLoginForm);
+  document.getElementById("tabRegister").addEventListener("click", showRegisterForm);
+  if(tab === "register") showRegisterForm(); else showLoginForm();
+  document.getElementById("authAdminLinkBtn").addEventListener("click", ()=>{
+    renderAdminAccessForm("authFormArea", "auth", ()=>{
+      renderAuthArea();
+      root.innerHTML = "";
+      if(afterSuccessCallback) afterSuccessCallback();
+    });
+  });
+}
+function requireAuth(callback){
+  if(currentUser){ callback(); return; }
+  toast(t("authRequiredToPost"), true);
+  openAuthModal(callback, "register");
+}
+
+/* ============ AUTH GATE (full-screen, shown before any app access) ============ */
+let currentGateTab = "login";
+function showMainApp(){
+  document.getElementById("authGate").style.display = "none";
+  document.getElementById("mainApp").style.display = "block";
+  fullRerender();
+}
+function showAuthGate(tab){
+  document.getElementById("mainApp").style.display = "none";
+  document.getElementById("authGate").style.display = "flex";
+  renderAuthGateForm(tab || currentGateTab || "login");
+}
+function renderAuthGateForm(tab){
+  currentGateTab = tab;
+  document.getElementById("gateTabLogin").classList.toggle("active", tab==="login");
+  document.getElementById("gateTabRegister").classList.toggle("active", tab==="register");
+  const area = document.getElementById("authGateFormArea");
+  if(tab === "login"){
+    area.innerHTML = '<div class="field"><label for="gateUsername">'+t("fUsername")+'</label><input type="text" id="gateUsername"></div>'
+      + '<div class="field"><label for="gatePassword">'+t("fPassword")+'</label><input type="password" id="gatePassword"></div>'
+      + '<div class="error-text" id="gateErr"></div>'
+      + '<button class="btn btn-primary" style="width:100%;justify-content:center;" id="gateSubmit">'+t("authLoginBtn")+'</button>';
+    document.getElementById("gateSubmit").addEventListener("click", async ()=>{
+      const username = document.getElementById("gateUsername").value.trim();
+      const password = document.getElementById("gatePassword").value;
+      const errEl = document.getElementById("gateErr");
+      errEl.textContent = "";
+      const hash = await hashPassword(password);
+      const user = users.find(u=>u.username.toLowerCase() === username.toLowerCase() && u.passHash === hash);
+      if(!user){ errEl.textContent = t("authInvalidLogin"); return; }
+      currentUser = {id:user.id, username:user.username, isAdmin: !!user.isAdmin};
+      saveSession();
+      toast(t("authLoginSuccess"));
+      showMainApp();
+    });
+  }else{
+    area.innerHTML = '<div class="field"><label for="gateUsername">'+t("fUsername")+'</label><input type="text" id="gateUsername"></div>'
+      + '<div class="field"><label for="gatePassword">'+t("fPassword")+'</label><input type="password" id="gatePassword"></div>'
+      + '<div class="field"><label for="gatePassword2">'+t("fPasswordConfirm")+'</label><input type="password" id="gatePassword2"></div>'
+      + '<div class="error-text" id="gateErr"></div>'
+      + '<button class="btn btn-primary" style="width:100%;justify-content:center;" id="gateSubmit">'+t("authRegisterBtn")+'</button>';
+    document.getElementById("gateSubmit").addEventListener("click", async ()=>{
+      const username = document.getElementById("gateUsername").value.trim();
+      const password = document.getElementById("gatePassword").value;
+      const password2 = document.getElementById("gatePassword2").value;
+      const errEl = document.getElementById("gateErr");
+      errEl.textContent = "";
+      if(username.length < 3){ errEl.textContent = t("authUsernameShort"); return; }
+      if(users.some(u=>u.username.toLowerCase() === username.toLowerCase())){ errEl.textContent = t("authUsernameTaken"); return; }
+      if(password.length < 4){ errEl.textContent = t("authPasswordShort"); return; }
+      if(password !== password2){ errEl.textContent = t("authPasswordMismatch"); return; }
+      const hash = await hashPassword(password);
+      const id = uid();
+      users.push({id, username, passHash:hash, createdAt: nowIso(), isAdmin:false});
+      saveUsers();
+      currentUser = {id, username, isAdmin:false};
+      saveSession();
+      toast(t("authRegisterSuccess"));
+      showMainApp();
+    });
+  }
+}
+function wireAuthGate(){
+  document.getElementById("gateTabLogin").addEventListener("click", ()=>renderAuthGateForm("login"));
+  document.getElementById("gateTabRegister").addEventListener("click", ()=>renderAuthGateForm("register"));
+  document.getElementById("gateLangToggle").addEventListener("click", ()=>{
+    lang = lang === "bn" ? "en" : "bn";
+    savePrefs();
+    applyI18nStrings();
+    document.getElementById("gateLangToggle").textContent = lang === "bn" ? "EN" : "বাং";
+    renderAuthGateForm(currentGateTab);
+  });
+  document.getElementById("gateAdminLinkBtn").addEventListener("click", ()=>{
+    renderAdminAccessForm("authGateFormArea", "gate", ()=>{ showMainApp(); });
+  });
+}
+
+/* ============ DONOR FORM ============ */
+function openDonorForm(donorId){
+  editingDonorId = donorId || null;
+  const donor = editingDonorId ? donors.find(d=>d.id===editingDonorId) : null;
+  const root = document.getElementById("modalRoot");
+  const districtOptions = Object.keys(DISTRICT_NAMES).map(dk=>
+    '<option value="'+dk+'"'+(donor && donor.district===dk?" selected":"")+'>'+DISTRICT_NAMES[dk][lang]+'</option>'
+  ).join("");
+  const bgOptions = BLOOD_GROUPS.map(bg=>
+    '<option value="'+bg+'"'+(donor && donor.bloodGroup===bg?" selected":"")+'>'+bg+'</option>'
+  ).join("");
+  root.innerHTML = '<div class="modal-backdrop"><div class="modal-box" style="max-width:480px;max-height:85vh;overflow:auto;" role="dialog" aria-modal="true">'
+    + '<h3 style="margin-bottom:14px;">'+ (donor ? t("formEditDonorTitle") : t("formRegisterTitle")) +'</h3>'
+    + '<div id="donorFormMsg"></div>'
+    + '<div class="field"><label for="fName">'+t("fName")+'</label><input type="text" id="fName" value="'+(donor?escapeHtml(donor.name):"")+'"><div class="error-text" id="errName"></div></div>'
+    + '<div class="field"><label for="fPhone">'+t("fPhone")+'</label><input type="tel" id="fPhone" value="'+(donor?escapeHtml(donor.phone):"")+'"><div class="error-text" id="errPhone"></div></div>'
+    + '<div class="field-row">'
+    + '<div class="field"><label for="fBloodGroup">'+t("fBloodGroup")+'</label><select id="fBloodGroup"><option value="">--</option>'+bgOptions+'</select><div class="error-text" id="errBg"></div></div>'
+    + '<div class="field"><label for="fDistrict">'+t("fDistrict")+'</label><select id="fDistrict"><option value="">--</option>'+districtOptions+'</select><div class="error-text" id="errDistrict"></div></div>'
+    + '</div>'
+    + '<div class="field"><label for="fArea">'+t("fArea")+'</label><input type="text" id="fArea" value="'+(donor&&donor.area?escapeHtml(donor.area):"")+'"></div>'
+    + '<div class="field"><label for="fLastDonation">'+t("fLastDonation")+'</label><input type="date" id="fLastDonation" value="'+(donor&&donor.lastDonation?donor.lastDonation.slice(0,10):"")+'"></div>'
+    + '<div class="field"><label for="fAvailability">'+t("fAvailability")+'</label><select id="fAvailability">'
+      + '<option value="now"'+(!donor||donor.status==="now"?" selected":"")+'>'+t("statusNow")+'</option>'
+      + '<option value="later"'+(donor&&donor.status==="later"?" selected":"")+'>'+t("statusLater")+'</option>'
+      + '<option value="off"'+(donor&&donor.status==="off"?" selected":"")+'>'+t("statusOff")+'</option>'
+      + '</select></div>'
+    + (!donor ? '<div class="checkbox-row" style="margin-bottom:12px;"><input type="checkbox" id="fRemind"><label for="fRemind" style="margin:0;">'+t("fRemindMe")+'</label></div>' : '')
+    + '<div class="disclosure">'+t("phoneDisclosure")+' '+t("ownerNote")+'</div>'
+    + '<div class="modal-actions"><button class="btn btn-outline" id="donorFormCancel">'+t("cancel")+'</button>'
+    + '<button class="btn btn-primary" id="donorFormSave">'+(donor?t("update"):t("save"))+'</button></div>'
+    + '</div></div>';
+  document.getElementById("donorFormCancel").addEventListener("click", ()=>{ root.innerHTML=""; editingDonorId=null; });
+  document.getElementById("donorFormSave").addEventListener("click", submitDonorForm);
+}
+function submitDonorForm(){
+  const name = document.getElementById("fName").value.trim();
+  const phoneRaw = document.getElementById("fPhone").value.trim();
+  const bg = document.getElementById("fBloodGroup").value;
+  const district = document.getElementById("fDistrict").value;
+  const area = document.getElementById("fArea").value.trim();
+  const lastDonation = document.getElementById("fLastDonation").value;
+  const status = document.getElementById("fAvailability").value || "now";
+  const remindEl = document.getElementById("fRemind");
+  const remind = remindEl ? remindEl.checked : false;
+
+  ["errName","errPhone","errBg","errDistrict"].forEach(id=>document.getElementById(id).textContent="");
+  let ok = true;
+  if(!name){ document.getElementById("errName").textContent = t("errRequired"); ok=false; }
+  const phone = normalizePhone(phoneRaw);
+  if(!phone){ document.getElementById("errPhone").textContent = t("errPhone"); ok=false; }
+  if(!bg){ document.getElementById("errBg").textContent = t("errRequired"); ok=false; }
+  if(!district){ document.getElementById("errDistrict").textContent = t("errRequired"); ok=false; }
+  if(!ok) return;
+
+  if(editingDonorId){
+    const donor = donors.find(d=>d.id===editingDonorId);
+    Object.assign(donor, {name, phone, bloodGroup:bg, district, area, lastDonation: lastDonation || null, status});
+    saveDonors();
+    document.getElementById("modalRoot").innerHTML = "";
+    renderDonorGrid(editingDonorId); renderMap();
+    if(document.getElementById("adminDashboard").classList.contains("open")) renderAdminTab(adminActiveTab);
+    toast(t("successDonorUpdate"));
+    editingDonorId = null;
+  }else{
+    if(currentUser && countRecentByUser(donors, currentUser.id, 60*60*1000) >= MAX_DONOR_POSTS_PER_HOUR){
+      document.getElementById("errName").textContent = t("rateLimitMsg");
+      return;
+    }
+    if(hasRecentDuplicatePhone(donors, phone, DUPLICATE_PHONE_COOLDOWN_MS)){
+      document.getElementById("errPhone").textContent = t("duplicatePhoneMsg");
+      return;
+    }
+    const id = uid();
+    const donor = {id, name, phone, bloodGroup:bg, district, area, lastDonation: lastDonation || null, status, createdAt: nowIso(), ownerUserId: currentUser ? currentUser.id : null};
+    donors.push(donor);
+    ownedDonorIds.push(id);
+    saveDonors(); saveOwned();
+    if(remind && "Notification" in window){
+      Notification.requestPermission().then(perm=>{
+        if(perm === "granted"){
+          reminderIds.push(id);
+          savePrefs();
+        }
+      });
+    }
+    filters = { bloodGroup:null, division:null, district:null, eligibleOnly:false, availableNowOnly:false, radiusKm:null };
+    document.getElementById("eligibleOnlyCheck").checked = false;
+    document.getElementById("availableNowCheck").checked = false;
+    document.getElementById("radiusSelect").value = "";
+    renderBloodGroupFilter(); renderDivisionDistrictSelects();
+    document.getElementById("modalRoot").innerHTML = "";
+    renderDonorGrid(id); renderMap();
+    toast(t("successDonorAdd"));
+  }
+}
+
+/* ============ REQUEST FORM ============ */
+function openRequestForm(reqId){
+  editingRequestId = reqId || null;
+  const req = editingRequestId ? requests.find(r=>r.id===editingRequestId) : null;
+  const root = document.getElementById("modalRoot");
+  const districtOptions = Object.keys(DISTRICT_NAMES).map(dk=>
+    '<option value="'+dk+'"'+(req && req.district===dk?" selected":"")+'>'+DISTRICT_NAMES[dk][lang]+'</option>'
+  ).join("");
+  const bgOptions = BLOOD_GROUPS.map(bg=>
+    '<option value="'+bg+'"'+(req && req.bloodGroup===bg?" selected":"")+'>'+bg+'</option>'
+  ).join("");
+  root.innerHTML = '<div class="modal-backdrop"><div class="modal-box" style="max-width:480px;max-height:85vh;overflow:auto;" role="dialog" aria-modal="true">'
+    + '<h3 style="margin-bottom:14px;">'+ (req ? t("formEditReqTitle") : t("reqBoardTitle")) +'</h3>'
+    + '<div class="field"><label for="rPatientName">'+t("fPatientName")+'</label><input type="text" id="rPatientName" value="'+(req?escapeHtml(req.patientName):"")+'"><div class="error-text" id="rErrName"></div></div>'
+    + '<div class="field-row">'
+    + '<div class="field"><label for="rBloodGroup">'+t("fBloodGroup")+'</label><select id="rBloodGroup"><option value="">--</option>'+bgOptions+'</select><div class="error-text" id="rErrBg"></div></div>'
+    + '<div class="field"><label for="rUrgency">'+t("fUrgency")+'</label><select id="rUrgency"><option value="Critical"'+(!req||req.urgency==="Critical"?" selected":"")+'>'+t("critical")+'</option><option value="Moderate"'+(req&&req.urgency==="Moderate"?" selected":"")+'>'+t("moderate")+'</option></select></div>'
+    + '</div>'
+    + '<div class="field-row">'
+    + '<div class="field"><label for="rUnits">'+t("fUnits")+'</label><input type="number" min="1" id="rUnits" value="'+(req?req.unitsNeeded:1)+'"></div>'
+    + '<div class="field"><label for="rDistrict">'+t("fDistrict")+'</label><select id="rDistrict"><option value="">--</option>'+districtOptions+'</select><div class="error-text" id="rErrDistrict"></div></div>'
+    + '</div>'
+    + '<div class="field"><label for="rHospital">'+t("fHospital")+'</label><input type="text" id="rHospital" value="'+(req?escapeHtml(req.hospital):"")+'"><div class="error-text" id="rErrHospital"></div></div>'
+    + '<div class="field"><label for="rMapLink">'+t("fMapLink")+'</label><input type="text" id="rMapLink" value="'+(req&&req.hospitalMapLink?escapeHtml(req.hospitalMapLink):"")+'"></div>'
+    + '<div class="field"><label for="rContactPhone">'+t("fContactPhone")+'</label><input type="tel" id="rContactPhone" value="'+(req?escapeHtml(req.contactPhone):"")+'"><div class="error-text" id="rErrPhone"></div></div>'
+    + '<div class="field"><label for="rNote">'+t("fNote")+'</label><textarea id="rNote" rows="2">'+(req&&req.note?escapeHtml(req.note):"")+'</textarea></div>'
+    + '<div class="disclosure">'+t("phoneDisclosure")+' '+t("ownerNote")+'</div>'
+    + '<div class="modal-actions"><button class="btn btn-outline" id="reqFormCancel">'+t("cancel")+'</button>'
+    + '<button class="btn btn-danger" id="reqFormSave">'+(req?t("update"):t("postRequest"))+'</button></div>'
+    + '</div></div>';
+  document.getElementById("reqFormCancel").addEventListener("click", ()=>{ root.innerHTML=""; editingRequestId=null; });
+  document.getElementById("reqFormSave").addEventListener("click", submitRequestForm);
+}
+function submitRequestForm(){
+  const patientName = document.getElementById("rPatientName").value.trim();
+  const bg = document.getElementById("rBloodGroup").value;
+  const urgency = document.getElementById("rUrgency").value;
+  const units = parseInt(document.getElementById("rUnits").value, 10) || 1;
+  const district = document.getElementById("rDistrict").value;
+  const hospital = document.getElementById("rHospital").value.trim();
+  const mapLink = document.getElementById("rMapLink").value.trim();
+  const phoneRaw = document.getElementById("rContactPhone").value.trim();
+  const note = document.getElementById("rNote").value.trim();
+
+  ["rErrName","rErrBg","rErrDistrict","rErrHospital","rErrPhone"].forEach(id=>document.getElementById(id).textContent="");
+  let ok = true;
+  if(!patientName){ document.getElementById("rErrName").textContent = t("errRequired"); ok=false; }
+  if(!bg){ document.getElementById("rErrBg").textContent = t("errRequired"); ok=false; }
+  if(!district){ document.getElementById("rErrDistrict").textContent = t("errRequired"); ok=false; }
+  if(!hospital){ document.getElementById("rErrHospital").textContent = t("errRequired"); ok=false; }
+  const phone = normalizePhone(phoneRaw);
+  if(!phone){ document.getElementById("rErrPhone").textContent = t("errPhone"); ok=false; }
+  if(!ok) return;
+
+  if(editingRequestId){
+    const req = requests.find(r=>r.id===editingRequestId);
+    Object.assign(req, {patientName, bloodGroup:bg, urgency, unitsNeeded:units, district, hospital, hospitalMapLink: mapLink||null, contactPhone:phone, note});
+    saveRequests();
+    document.getElementById("modalRoot").innerHTML = "";
+    renderRequests();
+    if(document.getElementById("adminDashboard").classList.contains("open")) renderAdminTab(adminActiveTab);
+    toast(t("successReqUpdate"));
+    editingRequestId = null;
+  }else{
+    if(currentUser && countRecentByUser(requests, currentUser.id, 60*60*1000) >= MAX_REQUEST_POSTS_PER_HOUR){
+      document.getElementById("rErrName").textContent = t("rateLimitMsg");
+      return;
+    }
+    if(hasRecentDuplicatePhone(requests, phone, DUPLICATE_PHONE_COOLDOWN_MS)){
+      document.getElementById("rErrPhone").textContent = t("duplicatePhoneMsg");
+      return;
+    }
+    const id = uid();
+    const req = {id, patientName, bloodGroup:bg, urgency, unitsNeeded:units, district, hospital, hospitalMapLink: mapLink||null, contactPhone:phone, note, createdAt: nowIso(), ownerUserId: currentUser ? currentUser.id : null};
+    requests.push(req);
+    ownedRequestIds.push(id);
+    recordPost(rl.userRec);
+    saveRequests(); saveOwned();
+    document.getElementById("modalRoot").innerHTML = "";
+    renderRequests();
+    toast(t("successReqAdd"));
+  }
+}
+
+/* ============ REMINDERS ============ */
+function checkReminders(){
+  if(!("Notification" in window) || Notification.permission !== "granted") return;
+  reminderIds.forEach(id=>{
+    const donor = donors.find(d=>d.id===id);
+    if(!donor) return;
+    const elig = eligibility(donor);
+    if(elig.eligible){
+      new Notification(lang==="bn" ? "আপনার কুলডাউন শেষ হয়েছে!" : "Your cooldown has ended!", {
+        body: lang==="bn" ? "আপনি এখন আবার রক্তদান করতে পারেন।" : "You're eligible to donate blood again."
+      });
+      reminderIds = reminderIds.filter(r=>r!==id);
+      savePrefs();
+    }
+  });
+}
+
+/* ============ WIRE UP GLOBAL CONTROLS ============ */
+function setLocationStatus(text, type){
+  const el = document.getElementById("locationStatus");
+  el.textContent = text || "";
+  el.className = "location-status" + (text ? " show" : "") + (type ? " "+type : "");
+}
+function updateClearLocationVisibility(){
+  document.getElementById("clearLocationBtn").style.display = userLoc ? "inline-block" : "none";
+}
+
+function wireControls(){
+  document.getElementById("langToggle").addEventListener("click", ()=>{
+    lang = lang === "bn" ? "en" : "bn";
+    savePrefs();
+    fullRerender();
+  });
+  document.getElementById("themeToggle").addEventListener("click", ()=>{
+    theme = theme === "dark" ? "light" : "dark";
+    document.body.setAttribute("data-theme", theme);
+    savePrefs();
+    applyI18nStrings();
+  });
+  document.getElementById("heroSearchBtn").addEventListener("click", ()=>document.getElementById("searchSection").scrollIntoView({behavior:"smooth"}));
+  document.getElementById("heroRegisterBtn").addEventListener("click", ()=>requireAuth(()=>openDonorForm()));
+  document.getElementById("heroRequestBtn").addEventListener("click", ()=>requireAuth(()=>openRequestForm()));
+  document.getElementById("openRequestFormBtn").addEventListener("click", ()=>requireAuth(()=>openRequestForm()));
+  document.getElementById("openRegisterFormBtn").addEventListener("click", ()=>requireAuth(()=>openDonorForm()));
+  document.getElementById("divisionSelect").addEventListener("change", (e)=>{
+    filters.division = e.target.value || null;
+    filters.district = null;
+    renderDivisionDistrictSelects(); renderDonorGrid(); renderMap();
+  });
+  document.getElementById("districtSelect").addEventListener("change", (e)=>{
+    filters.district = e.target.value || null;
+    renderDonorGrid();
+  });
+  document.getElementById("eligibleOnlyCheck").addEventListener("change", (e)=>{
+    filters.eligibleOnly = e.target.checked;
+    renderDonorGrid();
+  });
+  document.getElementById("availableNowCheck").addEventListener("change", (e)=>{
+    filters.availableNowOnly = e.target.checked;
+    renderDonorGrid();
+  });
+  document.getElementById("radiusSelect").addEventListener("change", (e)=>{
+    filters.radiusKm = e.target.value ? Number(e.target.value) : null;
+    if(filters.radiusKm && !userLoc){
+      setLocationStatus(t("locDenied"), "error");
+    }
+    renderDonorGrid();
+  });
+  document.getElementById("useLocationBtn").addEventListener("click", ()=>{
+    if(!("geolocation" in navigator)){
+      setLocationStatus(t("locNotSupported")+" "+t("locManualLabel"), "error");
+      return;
+    }
+    setLocationStatus(t("locFetching"), "info");
+    navigator.geolocation.getCurrentPosition(
+      (pos)=>{
+        userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        manualLocationDistrict = null;
+        renderManualLocationSelect();
+        setLocationStatus(t("locFound")+" "+t("approxNote"), "success");
+        updateClearLocationVisibility();
+        renderDonorGrid();
+      },
+      ()=>{ setLocationStatus(t("locDenied"), "error"); },
+      { timeout: 8000 }
+    );
+  });
+  document.getElementById("manualLocationSelect").addEventListener("change", (e)=>{
+    const dk = e.target.value;
+    manualLocationDistrict = dk || null;
+    if(dk && DISTRICT_COORDS[dk]){
+      userLoc = { lat: DISTRICT_COORDS[dk][0], lng: DISTRICT_COORDS[dk][1] };
+      setLocationStatus(t("locManualSet")+" "+t("approxNote"), "success");
+    }else{
+      userLoc = null;
+      setLocationStatus("", null);
+    }
+    updateClearLocationVisibility();
+    renderDonorGrid();
+  });
+  document.getElementById("clearLocationBtn").addEventListener("click", ()=>{
+    userLoc = null;
+    manualLocationDistrict = null;
+    filters.radiusKm = null;
+    document.getElementById("radiusSelect").value = "";
+    renderManualLocationSelect();
+    setLocationStatus("", null);
+    updateClearLocationVisibility();
+    renderDonorGrid();
+  });
+  document.getElementById("mapModeDonors").addEventListener("click", ()=>{
+    mapMode = "donors";
+    document.getElementById("mapModeDonors").setAttribute("aria-pressed","true");
+    document.getElementById("mapModeDemand").setAttribute("aria-pressed","false");
+    renderMap();
+  });
+  document.getElementById("mapModeDemand").addEventListener("click", ()=>{
+    mapMode = "demand";
+    document.getElementById("mapModeDemand").setAttribute("aria-pressed","true");
+    document.getElementById("mapModeDonors").setAttribute("aria-pressed","false");
+    renderMap();
+  });
+  document.getElementById("clearFiltersBtn").addEventListener("click", ()=>{
+    filters = { bloodGroup:null, division:null, district:null, eligibleOnly:false, availableNowOnly:false, radiusKm:null };
+    userLoc = null;
+    manualLocationDistrict = null;
+    document.getElementById("eligibleOnlyCheck").checked = false;
+    document.getElementById("availableNowCheck").checked = false;
+    document.getElementById("radiusSelect").value = "";
+    setLocationStatus("", null);
+    updateClearLocationVisibility();
+    renderBloodGroupFilter(); renderDivisionDistrictSelects(); renderManualLocationSelect(); renderDonorGrid(); renderMap();
+  });
+  window.addEventListener("error", ()=>toast(t("jsErr"), true));
+}
+
+function fullRerender(){
+  applyI18nStrings();
+  renderAuthArea();
+  renderBloodGroupFilter();
+  renderDivisionDistrictSelects();
+  renderManualLocationSelect();
+  renderRequests();
+  renderDonorGrid();
+  renderMap();
+}
+
+async function init(){
+  await loadAll();
+  document.body.setAttribute("data-theme", theme);
+  wireControls();
+  wireAuthGate();
+  wireAdminDashboard();
+  applyI18nStrings();
+  document.getElementById("gateLangToggle").textContent = lang === "bn" ? "EN" : "বাং";
+  if(currentUser){
+    showMainApp();
+  }else{
+    showAuthGate("login");
+  }
+  checkReminders();
+  setInterval(()=>{ if(currentUser) renderRequests(); }, 1000);
+  setInterval(()=>{ if(currentUser) checkReminders(); }, 60000);
+}
+init();
+
+})();
+</script>
+</body>
+</html>
